@@ -1,9 +1,4 @@
-export default function(/* server */) {
-
-  /*
-    Seed your development database using your factories.
-    This data will not be loaded in your tests.
-  */
-
-  // server.createList('post', 10);
+export default function(server) {
+  server.create("data-subject", {firstName: "Bernard", lastName: "Roger", username: "bernard", password: "roger"});
+  server.create("data-subject", {firstName: "Antoine", lastName: "Roger", username: "antoine", password: "roger"})
 }

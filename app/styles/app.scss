@@ -1,0 +1,10 @@
+@import 'ember-paper';
+
+.error-toast {
+  .md-toast-content {
+    color: white;
+    color: RGB(var(--warn-500-contrast));
+    background-color: #f44336;
+    background-color: RGB(var(--warn-500))
+  }
+}
