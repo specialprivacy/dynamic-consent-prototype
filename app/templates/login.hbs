@@ -1,14 +1,18 @@
-{{#paper-form onSubmit=(action "login") as |form|}}
-  <div class="layout-row">
-    <div class="layout-column flex-50">
-      {{form.input label="Username" value=username onChange=(action (mut username)) required=true}}
+<div class="md-padding">
+  {{#paper-form onSubmit=(action "login") as |form|}}
+    <div class="layout-row">
+      <div class="layout-column flex">
+        {{form.input label="Username" value=username onChange=(action (mut username)) required=true}}
+      </div>
     </div>
-    <div class="layout-column flex-50">
-      {{form.input label="password" value=password onChange=(action (mut password)) required=true type="password"}}
+    <div class="layout-row">
+      <div class="layout-column flex">
+        {{form.input label="Password" value=password onChange=(action (mut password)) required=true type="password"}}
+      </div>
     </div>
-  </div>
-  <div class="layout-row">
-    {{#form.submit-button raised=true primary=true elementId="login"}}Log in{{/form.submit-button}}
-    {{paper-toaster}}
-  </div>
-{{/paper-form}}
+    <div class="layout-row">
+      {{#form.submit-button raised=true primary=true elementId="login"}}Log in{{/form.submit-button}}
+      {{paper-toaster}}
+    </div>
+  {{/paper-form}}
+</div>

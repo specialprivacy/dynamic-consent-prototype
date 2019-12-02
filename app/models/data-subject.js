@@ -3,5 +3,6 @@ const { Model, attr } = DS;
 
 export default Model.extend({
   firstName: attr(),
-  lastName: attr()
+  lastName: attr(),
+  hasCompletedSetup: attr()
 });

@@ -8,3 +8,8 @@
     background-color: RGB(var(--warn-500))
   }
 }
+
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+}

@@ -5,11 +5,11 @@ export default Route.extend({
   currentDataSubject: service(),
 
   beforeModel() {
-    if(this.currentDataSubject.currentDataSubject) {
+    if(!this.currentDataSubject.currentDataSubject) {
+      return this.replaceWith("login");
+    }
+    if(this.currentDataSubject.currentDataSubject.hasCompletedSetup) {
       return this.replaceWith("map");
     }
-  },
-  model() {
-    return this.store.createRecord("session");
   }
 });
