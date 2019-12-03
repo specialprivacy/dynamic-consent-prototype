@@ -1,56 +1,79 @@
-{{#paper-toolbar}}
-  {{#paper-toolbar-tools}}
-    {{#paper-button iconButton=true onClick=(action "goBack")}}
-      {{paper-icon "keyboard_arrow_left"}}
-    {{/paper-button}}
-    <h2>Notification customization</h2>
-    <span class="flex"></span>
-    <span>Step 3/3</span>
-  {{/paper-toolbar-tools}}
-{{/paper-toolbar}}
+<div class="layout-column">
+  {{#paper-toolbar class="layout-row"}}
+    {{#paper-toolbar-tools}}
+      {{#paper-button iconButton=true onClick=(action "goBack")}}
+        {{paper-icon "keyboard_arrow_left"}}
+      {{/paper-button}}
+      <h2>Notification customization</h2>
+      <span class="flex"></span>
+      <span>Step 3/3</span>
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
 
-<div class="md-padding">
-  <div>
-    You are already a customer of the cable subscription service <b>Apricot Cable Pro</b> and have agreed to your TV-viewing behaviour being collected and analyzed to improve the TV subscription service.
-    You can connect your TV-viewing interests with your preferences for events to receive event recommendations that more adequately reflect your actual interets.
+  <div class="layout-row">
+    <div class="flex-25"/>
+    {{#paper-card class="md-padding flex-50" as |card|}}
+      {{#card.content}}
+
+        <div class="layout-column md-padding">
+          <p>You are already a customer of the cable subscription service&nbsp;<b>Apricot Cable Pro</b>&nbsp;and have agreed
+          to your TV-viewing behaviour being collected and analyzed to improve the TV subscription service.
+          You can connect your TV-viewing interests with your preferences for events to receive event recommendations
+            that more adequately reflect your actual interets.</p>
+        </div>
+
+        <div class="layout-column md-padding">
+          <span class="layout-row">
+            <b>Why</b>&nbsp;Apricot uses your location data:
+          </span>
+          <ul class="layout-column">
+            <li>Improve the location-based event recommendations for you.</li>
+          </ul>
+        </div>
+
+        <div class="layout-column md-padding">
+          <span class="layout-row">
+            <b>Where</b>&nbsp;your data will be stored:
+          </span>
+          <ul class="layout-column">
+            <li>On servers in Europe (protective measures)</li>
+            <li>On servers in the USA (run by our affiliates)</li>
+          </ul>
+        </div>
+
+        <div class="layout-column md-padding">
+          <span class="layout-row">
+            For&nbsp;<b>how long</b>&nbsp;your data will be stored:
+          </span>
+          <ul class="layout-column">
+            <li>Until you revoke your consent or delete your account for the Apricot Event Recommender.</li>
+          </ul>
+        </div>
+
+        {{paper-divider class="layout-row md-padding"}}
+
+        <div class="layout-column md-padding">
+          <div class="layout-row">
+            Please select&nbsp;<b>if and how</b>&nbsp;the event recommendations you receive should be customized via your TV-viewing interests.
+          </div>
+
+          {{#paper-radio-group
+                  class="layout-column"
+                  groupValue=(readonly notificationMode)
+                  onChange=(action (mut notificationMode)) as |group|}}
+            {{#group.radio value="manual" primary=true}} Add manually {{/group.radio}}
+            {{#group.radio value="automatic" primary=true}} Add automatically {{/group.radio}}
+            {{#group.radio value="none" primary=true}} No additional customization {{/group.radio}}
+          {{/paper-radio-group}}
+        </div>
+
+        <div class="layout-row md-padding">
+          <div class="flex-40"/>
+          {{#paper-button raised=true primary=true onClick=(action "proceed")}}Proceed{{/paper-button}}
+          <div class="flex-40"/>
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    <div class="flex-25"/>
   </div>
-
-  {{paper-divider}}
-
-  <div>
-    <b>Why</b> Apricot would like to connect your TV-viewing behaviour to your preferences for event recommendations:
-    <ul>
-      <li>To improve the event recommendations for you.</li>
-    </ul>
-  </div>
-
-  <div>
-    <b>Where</b> your data will be stored:
-    <ul>
-      <li>On servers in Europe (protective measures)</li>
-      <li>On servers in the USA (run by our affiliates)</li>
-    </ul>
-  </div>
-
-  <div>
-    For <b>how long</b> your data will be stored:
-    <ul>
-      <li>Until you revoke your consent or delete your account for the Apricot Event Recommender.</li>
-    </ul>
-  </div>
-
-  {{paper-divider}}
-
-  <div>Please select <b>if and how</b> the event recommendations you receive should be customized via your TV-viewing interests.</div>
-
-  {{#paper-radio-group
-          groupValue=(readonly notificationMode)
-          onChange=(action (mut notificationMode)) as |group|}}
-    {{#group.radio value="manual" primary=true}} Add manually {{/group.radio}}
-    {{#group.radio value="automatic" primary=true}} Add automatically {{/group.radio}}
-    {{#group.radio value="none" primary=true}} No additional customization {{/group.radio}}
-  {{/paper-radio-group}}
-
-  {{#paper-button raised=true primary=true onClick=(action "proceed")}}Proceed{{/paper-button}}
-
 </div>

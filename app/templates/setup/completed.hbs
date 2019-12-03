@@ -1,20 +1,36 @@
-{{#paper-toolbar}}
-  {{#paper-toolbar-tools}}
-    {{#paper-button iconButton=true onClick=(action "goBack")}}
-      {{paper-icon "keyboard_arrow_left"}}
-    {{/paper-button}}
-    <h2>Setup complete</h2>
-  {{/paper-toolbar-tools}}
-{{/paper-toolbar}}
+<div class="layout-column">
+  {{#paper-toolbar class="layout-row"}}
+    {{#paper-toolbar-tools}}
+      {{#paper-button iconButton=true onClick=(action "goBack")}}
+        {{paper-icon "keyboard_arrow_left"}}
+      {{/paper-button}}
+      <h2>Setup complete</h2>
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
 
-<div class="md-padding">
-  <b>Your configuration is complete.</b>
+  <div class="layout-row">
+    <div class="flex-25"/>
+    {{#paper-card class="md-padding flex-50" as |card|}}
+      {{#card.content}}
 
-  <div>Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
 
-  <div>Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
+        <div class="layout-colum md-padding"><b>Your configuration is complete.</b></div>
 
-  <div>Click <b>Quit</b> to finish this setup.</div>
+        <div class="layout-colum md-padding">Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
 
-  <div>Have fun with the events recommendations!</div>
+        <div class="layout-colum md-padding">Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
+
+        <div class="layout-colum md-padding">Click <b>Quit</b> to finish this setup.</div>
+
+        <div class="layout-colum md-padding">Have fun with the events recommendations!</div>
+
+        <div class="layout-row md-padding">
+          <div class="flex-40"/>
+          {{#paper-button raised=true primary=true onClick=(action "finishSetup")}}Quit{{/paper-button}}
+          <div class="flex-40"/>
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    <div class="flex-25"/>
+  </div>
 </div>

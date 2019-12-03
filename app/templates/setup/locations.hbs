@@ -1,50 +1,77 @@
-{{#paper-toolbar}}
-  {{#paper-toolbar-tools}}
-    {{paper-button iconButton=true class="hidden"}}
-    <h2>Location-based events</h2>
-    <span class="flex"></span>
-    <span>Step 1/3</span>
-  {{/paper-toolbar-tools}}
-{{/paper-toolbar}}
-<div class="md-padding">
-  <div>Currently, you will receive event recommendations for the whole of Switzerland. Apricot would like to provide you with customized location-based recommendations.</div>
+<div class="layout-column">
+  {{#paper-toolbar class="layout-row"}}
+    {{#paper-toolbar-tools}}
+      {{paper-button iconButton=true class="hidden"}}
+      <h2>Location-based events</h2>
+      <span class="flex"></span>
+      <span>Step 1/3</span>
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
 
-  <div>
-    <b>Why</b> Apricot uses your location data:
-    <ul>
-      <li>Improve the location-based event recommendations for you.</li>
-    </ul>
+  <div class="layout-row">
+    <div class="flex-25"/>
+    {{#paper-card class="md-padding flex-50" as |card|}}
+      {{#card.content}}
+
+        <div class="layout-column md-padding">
+          Currently, you will receive event recommendations for the whole of Switzerland.
+          Apricot would like to provide you with customized location-based recommendations.
+        </div>
+
+        <div class="layout-column md-padding">
+          <span class="layout-row">
+            <b>Why</b>&nbsp;Apricot uses your location data:
+          </span>
+          <ul class="layout-column">
+            <li>Improve the location-based event recommendations for you.</li>
+          </ul>
+        </div>
+
+        <div class="layout-column md-padding">
+          <span class="layout-row">
+            <b>Where</b>&nbsp;your data will be stored:
+          </span>
+          <ul class="layout-column">
+            <li>On servers in Europe (protective measures)</li>
+            <li>On servers in the USA (run by our affiliates)</li>
+          </ul>
+        </div>
+
+        <div class="layout-column md-padding">
+          <span class="layout-row">
+            For&nbsp;<b>how long</b>&nbsp;your data will be stored:
+          </span>
+          <ul class="layout-column">
+            <li>Until you revoke your consent or delete your account for the Apricot Event Recommender.</li>
+          </ul>
+        </div>
+
+        {{paper-divider class="layout-row md-padding"}}
+
+        <div class="layout-column md-padding">
+          <div class="layout-row">Do you consent to your location being used for offering you location-based recommendation?</div>
+          {{#paper-radio-group
+                  class="layout-column"
+                  groupValue=(readonly hasLocationUsageBeenAccepted)
+                  onChange=(action (mut hasLocationUsageBeenAccepted)) as |group|}}
+            {{#group.radio value=true primary=true}} Yes {{/group.radio}}
+            {{#group.radio value=false primary=true}} No {{/group.radio}}
+          {{/paper-radio-group}}
+        </div>
+
+        {{paper-divider class="layout-row md-padding"}}
+
+        <div class="layout-row md-padding">
+          |More information should appear here|
+        </div>
+
+        <div class="layout-row md-padding">
+          <div class="flex-40"/>
+          {{#paper-button raised=true primary=true onClick=(action "proceed")}}Proceed{{/paper-button}}
+          <div class="flex-40"/>
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    <div class="flex-25"/>
   </div>
-
-  <div>
-    <b>Where</b> your data will be stored:
-    <ul>
-      <li>On servers in Europe (protective measures)</li>
-      <li>On servers in the USA (run by our affiliates)</li>
-    </ul>
-  </div>
-
-  <div>
-    For <b>how long</b> your data will be stored:
-    <ul>
-      <li>Until you revoke your consent or delete your account for the Apricot Event Recommender.</li>
-    </ul>
-  </div>
-
-  {{paper-divider}}
-
-  <div>Do you consent to your location being used for offering you location-based recommendation?</div>
-  {{#paper-radio-group
-          groupValue=(readonly hasLocationUsageBeenAccepted)
-          onChange=(action (mut hasLocationUsageBeenAccepted)) as |group|}}
-    {{#group.radio value=true primary=true}} Yes {{/group.radio}}
-    {{#group.radio value=false primary=true}} No {{/group.radio}}
-  {{/paper-radio-group}}
-
-  {{#paper-button raised=true primary=true onClick=(action "proceed")}}Proceed{{/paper-button}}
-
-  {{paper-divider}}
-
-  INFORMATION STUFF
-
 </div>

@@ -1,10 +1,65 @@
-{{#paper-toolbar}}
-  {{#paper-toolbar-tools}}
-    {{paper-button iconButton=true class="hidden"}}
-    <h2>Apricot event recommender</h2>
-  {{/paper-toolbar-tools}}
-{{/paper-toolbar}}
+{{position-watcher setOriginalPosition=(action "setOriginalPosition") onPositionChanged=(action "onPositionChanged")}}
 
-<div class="md-padding">
+<div class="layout-fill layout-column">
+  {{#paper-toolbar class="zindex60"}}
+    {{#paper-toolbar-tools}}
+      {{paper-button iconButton=true class="hidden"}}
+      <h2>S8-C</h2>
+      <span class="flex"></span>
+      {{#paper-button iconButton=true onClick=(fn (mut showCategories) (not showCategories))}}
+        {{paper-icon "category"}}
+      {{/paper-button}}
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
 
+  {{#paper-sidenav-container class=""}}
+    {{#paper-sidenav
+            class="md-whiteframe-z2"
+            name="left"
+            lockedOpen=showCategories
+            open=showCategories}}
+      {{#paper-toolbar as |toolbar|}}
+        {{#paper-toolbar-tools}}Categories{{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
+      {{#paper-content padding=true}}
+        |TODO: List & filter categories here => no impact on consent, just display|
+      {{/paper-content}}
+    {{/paper-sidenav}}
+
+    <div class="layout-fill zindex60 md-padding">
+    {{#if hasOriginalPositionBeenSet}}
+      <LeafletMap @lat={{lat}} @lng={{lng}} @zoom={{zoom}} @class={{"layout-fill"}} as |layers|>
+        <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+
+        <layers.marker
+          @lat={{dataSubjectLat}}
+          @lng={{dataSubjectLng}}
+          @draggable={{true}}
+          @onDragend={{action "updateLocation" r}}
+          @icon={{icon
+                iconSize=(array 40 40)
+                iconAnchor=(array 20 40)
+                iconUrl="https://icon-library.net/images/google-maps-person-icon/google-maps-person-icon-6.jpg"}}
+          as |marker|>
+          <marker.popup>
+            <h3>This is your current location.</h3>
+          </marker.popup>
+        </layers.marker>
+
+        <layers.marker-cluster as |cluster|>
+          {{#each recommendations as |recommendation|}}
+            <cluster.marker @location={{array recommendation.lat recommendation.lng}} as |marker|>
+              <marker.popup>
+                <h3>{{recommendation.title}}</h3>
+                <span>{{recommendation.description}}</span>
+              </marker.popup>
+            </cluster.marker>
+          {{/each}}
+        </layers.marker-cluster>
+
+      </LeafletMap>
+    {{/if}}
+    </div>
+
+  {{/paper-sidenav-container}}
 </div>

@@ -1,18 +1,35 @@
-<div class="md-padding">
-  {{#paper-form onSubmit=(action "login") as |form|}}
-    <div class="layout-row">
-      <div class="layout-column flex">
-        {{form.input label="Username" value=username onChange=(action (mut username)) required=true}}
-      </div>
-    </div>
-    <div class="layout-row">
-      <div class="layout-column flex">
-        {{form.input label="Password" value=password onChange=(action (mut password)) required=true type="password"}}
-      </div>
-    </div>
-    <div class="layout-row">
-      {{#form.submit-button raised=true primary=true elementId="login"}}Log in{{/form.submit-button}}
-      {{paper-toaster}}
-    </div>
-  {{/paper-form}}
+<div class="layout-column">
+  {{#paper-toolbar class="zindex60 layout-row"}}
+    {{#paper-toolbar-tools}}
+      {{paper-button iconButton=true class="hidden"}}
+      <h2>S8-C</h2>
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
+
+  <div class="layout-row">
+    <div class="flex-25"/>
+    {{#paper-card class="md-padding md-margin-auto flex-50" as |card|}}
+      {{#card.content}}
+        {{#paper-form onSubmit=(action "login") as |form|}}
+          <div class="layout-row">
+            <div class="layout-column flex-40">
+              {{form.input label="Username" value=username onChange=(action (mut username)) required=true}}
+            </div>
+            <div class="flex-10"/>
+            <div class="layout-column flex-40">
+              {{form.input label="Password" value=password onChange=(action (mut password)) required=true type="password"}}
+            </div>
+          </div>
+          <div class="layout-row">
+            <div class="flex-40"/>
+            {{#form.submit-button raised=true primary=true elementId="login"}}Log in{{/form.submit-button}}
+          </div>
+        {{/paper-form}}
+      {{/card.content}}
+    {{/paper-card}}
+    <div class="flex-25"/>
+  </div>
+
 </div>
+
+{{paper-toaster}}
