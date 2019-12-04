@@ -7,7 +7,7 @@ export default Controller.extend({
   lng: null,
   dataSubjectLat: null,
   dataSubjectLng: null,
-  showCategories: true,
+  showCategories: false,
 
   recommendations: Ember.computed.alias("model"),
 
@@ -33,3 +33,4 @@ export default Controller.extend({
     },
   }
 });
+

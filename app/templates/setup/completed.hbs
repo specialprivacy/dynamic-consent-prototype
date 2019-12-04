@@ -9,8 +9,8 @@
   {{/paper-toolbar}}
 
   <div class="layout-row">
-    <div class="flex-25"/>
-    {{#paper-card class="md-padding flex-50" as |card|}}
+    <div class="flex-gt-sm-25"/>
+    {{#paper-card class="md-padding flex" as |card|}}
       {{#card.content}}
 
 
@@ -24,13 +24,13 @@
 
         <div class="layout-colum md-padding">Have fun with the events recommendations!</div>
 
-        <div class="layout-row md-padding">
+        <div class="layout-row">
           <div class="flex-40"/>
           {{#paper-button raised=true primary=true onClick=(action "finishSetup")}}Quit{{/paper-button}}
           <div class="flex-40"/>
         </div>
       {{/card.content}}
     {{/paper-card}}
-    <div class="flex-25"/>
+    <div class="flex-gt-sm-25"/>
   </div>
 </div>

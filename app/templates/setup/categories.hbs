@@ -4,22 +4,22 @@
       {{#paper-button iconButton=true onClick=(action "goBack")}}
         {{paper-icon "keyboard_arrow_left"}}
       {{/paper-button}}
-      <h2>Event recommendation categories</h2>
+      <h2>Sightseeing recommendation categories</h2>
       <span class="flex"></span>
       <span>Step 2/3</span>
     {{/paper-toolbar-tools}}
   {{/paper-toolbar}}
 
   <div class="layout-row">
-    <div class="flex-25"/>
-    {{#paper-card class="md-padding flex-50" as |card|}}
+    <div class="flex-gt-sm-25"/>
+    {{#paper-card class="md-padding flex" as |card|}}
       {{#card.content}}
 
-        <div class="layout-row">Select the categories of events you want to receive recommendations for. If you do not select any categories, you will receive recommendations for events based only on the geographical area you selected on the previous page.</div>
+        <div class="layout-row">Select the different categories you want to receive recommendations for. If you do not select any categories, you will receive recommendations based only on the geographical area you provide the application with.</div>
 
         {{#paper-grid-list
                 class="layout-row"
-                cols="1 md-2 gt-md-6"
+                cols="3 md-4 gt-md-6"
                 rowHeight="gt-md-1:1 2:2"
                 gutter="12px gt-sm-8px" as |grid|}}
 
@@ -95,13 +95,13 @@
 
         {{/paper-grid-list}}
 
-        <div class="layout-row md-padding">
+        <div class="layout-row">
           <div class="flex-40"/>
           {{#paper-button raised=true primary=true onClick=(action "proceed")}}Next{{/paper-button}}
           <div class="flex-40"/>
         </div>
       {{/card.content}}
     {{/paper-card}}
-    <div class="flex-25"/>
+    <div class="flex-gt-sm-25"/>
   </div>
 </div>

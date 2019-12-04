@@ -11,15 +11,16 @@
   {{/paper-toolbar}}
 
   <div class="layout-row">
-    <div class="flex-25"/>
-    {{#paper-card class="md-padding flex-50" as |card|}}
+    <div class="flex-gt-sm-25"/>
+    {{#paper-card class="md-padding flex" as |card|}}
       {{#card.content}}
 
         <div class="layout-column md-padding">
-          <p>You are already a customer of the cable subscription service&nbsp;<b>Apricot Cable Pro</b>&nbsp;and have agreed
-          to your TV-viewing behaviour being collected and analyzed to improve the TV subscription service.
-          You can connect your TV-viewing interests with your preferences for events to receive event recommendations
-            that more adequately reflect your actual interets.</p>
+          // This screen should have different content depending on whether we are allowed to track the user's location or not.
+          // If we are, we can ask for permission to try to discover their interests based on locations they frequent and add it to their categories.
+          // If we are not, not sure what to show, maybe just a message to say there is no need to configure notifications?
+          Thanks to the location data we collect, we can try to understand your interests and provide you with new categories based on the locations you have visited.
+          Would you like us to try and provide you with categories you seem to enjoy but have not yet recorded?
         </div>
 
         <div class="layout-column md-padding">
@@ -27,7 +28,7 @@
             <b>Why</b>&nbsp;Apricot uses your location data:
           </span>
           <ul class="layout-column">
-            <li>Improve the location-based event recommendations for you.</li>
+            <li>Discover new data categories you might be interested in.</li>
           </ul>
         </div>
 
@@ -53,27 +54,36 @@
         {{paper-divider class="layout-row md-padding"}}
 
         <div class="layout-column md-padding">
-          <div class="layout-row">
+          <span class="md-padding">
             Please select&nbsp;<b>if and how</b>&nbsp;the event recommendations you receive should be customized via your TV-viewing interests.
-          </div>
+          </span>
 
           {{#paper-radio-group
                   class="layout-column"
                   groupValue=(readonly notificationMode)
                   onChange=(action (mut notificationMode)) as |group|}}
-            {{#group.radio value="manual" primary=true}} Add manually {{/group.radio}}
-            {{#group.radio value="automatic" primary=true}} Add automatically {{/group.radio}}
-            {{#group.radio value="none" primary=true}} No additional customization {{/group.radio}}
+            {{#group.radio value="manual" primary=true}}
+              <b>Add manually</b>
+              <p>You will receive notifications that will allow you to decide whether a category should be added to your preferences.</p>
+            {{/group.radio}}
+            {{#group.radio value="automatic" primary=true}}
+              <b>Add automatically</b>
+              <p>You will receive notifications to let you know when a new category has been added to your preferences.</p>
+            {{/group.radio}}
+            {{#group.radio value="none" primary=true}}
+              <b>No additional customization</b>
+              <p>Your location will not be used to tailor your preferences.</p>
+            {{/group.radio}}
           {{/paper-radio-group}}
         </div>
 
-        <div class="layout-row md-padding">
+        <div class="layout-row">
           <div class="flex-40"/>
           {{#paper-button raised=true primary=true onClick=(action "proceed")}}Proceed{{/paper-button}}
           <div class="flex-40"/>
         </div>
       {{/card.content}}
     {{/paper-card}}
-    <div class="flex-25"/>
+    <div class="flex-gt-sm-25"/>
   </div>
 </div>

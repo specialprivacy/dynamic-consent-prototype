@@ -7,24 +7,24 @@
   {{/paper-toolbar}}
 
   <div class="layout-row">
-    <div class="flex-25"/>
-    {{#paper-card class="md-padding flex-50" as |card|}}
+    <div class="flex-gt-sm-25"/>
+    {{#paper-card class="md-padding flex" as |card|}}
       {{#card.content}}
         <div class="layout-row md-padding">
-          Thank your for choosing the free Apricot event recommendation service, which will provide you with customised eevnt recommandations based on your personal interests.
+          Thank your for choosing our free sightseeing recommendation service, which will provide you with customised locations to visit based on your personal interests.
         </div>
 
         <div class="layout-row md-padding">
-          We at Apricot are positive that you will love your event recommendations. Starting on the next screen, we will walk you through three simple steps to get the most out of our recommendations.
+          We are positive that you will love our recommendations. Starting on the next screen, we will walk you through three simple steps to get the most out of them.
         </div>
 
-        <div class="layout-row md-padding">
+        <div class="layout-row">
           <div class="flex-40"/>
           {{#paper-button class="flex-20" raised=true primary=true onClick=(action "proceed")}}Get started{{/paper-button}}
           <div class="flex-40"/>
         </div>
       {{/card.content}}
     {{/paper-card}}
-    <div class="flex-25"/>
+    <div class="flex-gt-sm-25"/>
   </div>
 </div>

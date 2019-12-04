@@ -9,12 +9,12 @@
   {{/paper-toolbar}}
 
   <div class="layout-row">
-    <div class="flex-25"/>
-    {{#paper-card class="md-padding flex-50" as |card|}}
+    <div class="flex-gt-sm-25"/>
+    {{#paper-card class="md-padding flex" as |card|}}
       {{#card.content}}
 
         <div class="layout-column md-padding">
-          Currently, you will receive event recommendations for the whole of Switzerland.
+          Currently, you will receive sightseeing recommendations around a location you specify.
           Apricot would like to provide you with customized location-based recommendations.
         </div>
 
@@ -23,7 +23,7 @@
             <b>Why</b>&nbsp;Apricot uses your location data:
           </span>
           <ul class="layout-column">
-            <li>Improve the location-based event recommendations for you.</li>
+            <li>Provide you with recommendations based on your location.</li>
           </ul>
         </div>
 
@@ -42,14 +42,14 @@
             For&nbsp;<b>how long</b>&nbsp;your data will be stored:
           </span>
           <ul class="layout-column">
-            <li>Until you revoke your consent or delete your account for the Apricot Event Recommender.</li>
+            <li>Until you revoke your consent or delete your account for the Apricot Sightseeing Recommender.</li>
           </ul>
         </div>
 
         {{paper-divider class="layout-row md-padding"}}
 
         <div class="layout-column md-padding">
-          <div class="layout-row">Do you consent to your location being used for offering you location-based recommendation?</div>
+          <span class="md-padding">Do you consent to your location being used to provide you location-based sightseeing recommendation?</span>
           {{#paper-radio-group
                   class="layout-column"
                   groupValue=(readonly hasLocationUsageBeenAccepted)
@@ -59,19 +59,27 @@
           {{/paper-radio-group}}
         </div>
 
-        {{paper-divider class="layout-row md-padding"}}
-
-        <div class="layout-row md-padding">
-          |More information should appear here|
-        </div>
-
-        <div class="layout-row md-padding">
+        <div class="layout-row">
           <div class="flex-40"/>
           {{#paper-button raised=true primary=true onClick=(action "proceed")}}Proceed{{/paper-button}}
           <div class="flex-40"/>
         </div>
+
+        {{paper-divider class="layout-row md-padding"}}
+
+        <div class="layout-row md-padding">
+          <div class="layout-column flex-20">{{paper-icon "info"}}</div>
+          <div class="layout-column flex">You may adapt your privacy settings at any time via your Privacy dashboard. The dashboard and Apricot's privacy policy are available for your reference via the buttons below.</div>
+        </div>
+
+        <div class="layout-row md-padding">
+          <button class="flex-33">Privacy policy</button>
+          <button class="flex-33">Dashboard</button>
+          <button class="flex-33">Quit</button>
+        </div>
+
       {{/card.content}}
     {{/paper-card}}
-    <div class="flex-25"/>
+    <div class="flex-gt-sm-25"/>
   </div>
 </div>
