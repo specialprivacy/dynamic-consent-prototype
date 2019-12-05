@@ -9,10 +9,9 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('login');
   this.route('setup', function() {
-    this.route('categories');
-    this.route('locations');
     this.route('notifications');
     this.route('completed');
+    this.route('consents');
   });
   this.route('map');
 });

@@ -2,10 +2,8 @@
 
 .error-toast {
   .md-toast-content {
-    color: white;
     color: RGB(var(--warn-500-contrast));
     background-color: #f44336;
-    background-color: RGB(var(--warn-500))
   }
 }
 
@@ -14,6 +12,22 @@
   opacity: 0;
 }
 
-.zindex60 {
-  z-index: 60;
+.min-width-80 {
+  min-width: 80%;
+}
+
+.leaflet-container {
+  z-index: 50;
+}
+
+
+.card-content {
+  overflow-y: auto;
+}
+
+.full-sized {
+  min-height: 100vh;
+  max-height: 100vh;
+  min-height: -webkit-fill-available;
+  max-height: -webkit-fill-available;
 }

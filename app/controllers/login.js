@@ -10,7 +10,8 @@ export default Controller.extend({
 
   actions: {
     login() {
-      notifyMe();
+      document.getElementById("username").blur();
+      document.getElementById("password").blur();
       this.model.save().then(session => {
         return session.get("dataSubject");
       }).then(dataSubject => {

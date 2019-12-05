@@ -1,65 +1,88 @@
 {{position-watcher setOriginalPosition=(action "setOriginalPosition") onPositionChanged=(action "onPositionChanged")}}
 
-<div class="layout-fill layout-column">
-  {{#paper-toolbar class="zindex60"}}
+{{#presenter-container class="layout-column flex" as |container|}}
+  {{#container.header}}
     {{#paper-toolbar-tools}}
       {{paper-button iconButton=true class="hidden"}}
       <h2>S8-C</h2>
       <span class="flex"></span>
-      {{#paper-button iconButton=true onClick=(fn (mut showCategories) (not showCategories))}}
+      {{#paper-button iconButton=true onClick=(action (mut showCategories))}}
         {{paper-icon "category"}}
       {{/paper-button}}
     {{/paper-toolbar-tools}}
-  {{/paper-toolbar}}
+  {{/container.header}}
 
-  {{#paper-sidenav-container class=""}}
+
+  {{#paper-sidenav-container class="flex layout-row"}}
+
     {{#paper-sidenav
             class="md-whiteframe-z2"
-            name="left"
+            open=showCategories
             lockedOpen=showCategories
-            open=showCategories}}
+            onToggle=(action (mut showCategories))}}
       {{#paper-toolbar as |toolbar|}}
-        {{#paper-toolbar-tools}}Categories{{/paper-toolbar-tools}}
+        {{#paper-toolbar-tools}}Left Sidenav{{/paper-toolbar-tools}}
       {{/paper-toolbar}}
       {{#paper-content padding=true}}
-        |TODO: List & filter categories here => no impact on consent, just display|
+        Çup?
+        {{#paper-button iconButton=true onClick=(action (mut showCategories))}}
+          {{paper-icon "category"}}
+        {{/paper-button}}
       {{/paper-content}}
     {{/paper-sidenav}}
 
-    <div class="layout-fill zindex60 md-padding">
-    {{#if hasOriginalPositionBeenSet}}
-      <LeafletMap @lat={{lat}} @lng={{lng}} @zoom={{zoom}} @class={{"layout-fill"}} as |layers|>
-        <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+    {{#container.content class="flex layout-column" as |card|}}
+      {{#card.content class="flex card-content"}}
+        {{#if hasOriginalPositionBeenSet}}
+          <LeafletMap @lat={{lat}} @lng={{lng}} @zoom={{zoom}} @class={{"layout-fill"}} as |layers|>
+            <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
-        <layers.marker
-          @lat={{dataSubjectLat}}
-          @lng={{dataSubjectLng}}
-          @draggable={{true}}
-          @onDragend={{action "updateLocation" r}}
-          @icon={{icon
-                iconSize=(array 40 40)
-                iconAnchor=(array 20 40)
-                iconUrl="https://icon-library.net/images/google-maps-person-icon/google-maps-person-icon-6.jpg"}}
-          as |marker|>
-          <marker.popup>
-            <h3>This is your current location.</h3>
-          </marker.popup>
-        </layers.marker>
-
-        <layers.marker-cluster as |cluster|>
-          {{#each recommendations as |recommendation|}}
-            <cluster.marker @location={{array recommendation.lat recommendation.lng}} as |marker|>
+            <layers.marker
+              @lat={{dataSubjectLat}}
+              @lng={{dataSubjectLng}}
+              @draggable={{true}}
+              @onDragend={{action "updateLocation" r}}
+              @icon={{icon
+                    iconSize=(array 40 40)
+                    iconAnchor=(array 20 40)
+                    popupAnchor=(array 0 -40)
+                    iconUrl="https://icon-library.net/images/google-maps-person-icon/google-maps-person-icon-6.jpg"}}
+              as |marker|>
               <marker.popup>
-                <h3>{{recommendation.title}}</h3>
-                <span>{{recommendation.description}}</span>
+                <h3>This is your current location.</h3>
               </marker.popup>
-            </cluster.marker>
-          {{/each}}
-        </layers.marker-cluster>
+            </layers.marker>
 
-      </LeafletMap>
-    {{/if}}
-    </div>
+            <layers.marker-cluster as |cluster|>
+              {{#each recommendations as |recommendation|}}
+                <cluster.marker @location={{array recommendation.lat recommendation.lng}} as |marker|>
+                  <marker.popup>
+                    <h3>{{recommendation.title}}</h3>
+                    <span>{{recommendation.description}}</span>
+                  </marker.popup>
+                </cluster.marker>
+              {{/each}}
+            </layers.marker-cluster>
+
+          </LeafletMap>
+        {{else}}
+          <LeafletMap @lat={{0}} @lng={{0}} @zoom={{zoom}} @class={{"layout-fill"}} as |layers|>
+            <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+
+          </LeafletMap>
+        {{/if}}
+      {{/card.content}}
+
+      {{paper-divider}}
+      {{#card.actions}}
+        {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
+        {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
+      {{/card.actions}}
+
+
+    {{/container.content}}
 
   {{/paper-sidenav-container}}
-</div>
+
+{{/presenter-container}}
+
