@@ -1,29 +1,46 @@
-{{#presenter-container class="layout-column flex" as |container|}}
+{{#presenter-container class="flex layout-column" as |container|}}
   {{#container.header}}
     {{#paper-toolbar-tools}}
       {{paper-button iconButton=true class="hidden"}}
-      <h2>S8-C</h2>
+      <h2>S8-C recommender engine</h2>
+      <span class="flex"></span>
+      <span>Setup 1/4</span>
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
-  {{#container.content class="min-width-80 layout-column flex" as |card|}}
-    {{#paper-form class="layout-column flex" onSubmit=(action "proceed") as |form|}}
-      {{#card.content class="flex layout-column card-content"}}
-        <div class="md-padding">
-          Thank your for choosing our free sightseeing recommendation service, which will provide you with customised locations to visit based on your personal interests.
+  {{#container.content class="flex layout-column min-width-70" as |card|}}
+    {{#paper-form class="flex layout-column" onSubmit=(action "proceed") as |form|}}
+      {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
+
+        <div class="md-padding margin-auto">
+          <img src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="max-height:100%;max-width:100%;"/>
         </div>
 
-        <div class="md-padding">
-          We are positive that you will love our recommendations. Starting on the next screen, we will walk you through three simple steps to get the most out of them.
+        <div class="flex layout-column">
+          <div class="md-padding">
+            Thank your for choosing our free sightseeing recommendation service, which will provide you with locations to check out.
+          </div>
+
+          <div class="md-padding">
+            You can check the privacy policy by clicking the {{#paper-button raised=true primary=true}}Privacy policy{{/paper-button}} button.
+          </div>
+
+          <div class="md-padding">
+            At any time, you can check what data we are processing by clicking the {{#paper-button raised=true primary=true}}Dashboard{{/paper-button}} button.
+          </div>
+
+          <div class="md-padding">
+            We just need to configure a few things with you before we can get started.
+          </div>
         </div>
 
       {{/card.content}}
 
       {{paper-divider}}
       {{#card.actions class="layout-row"}}
-        {{#form.submit-button raised=true primary=true class="flex"}}Get started{{/form.submit-button}}
         {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
         {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
+        {{#form.submit-button raised=true primary=true class="flex"}}Next{{/form.submit-button}}
       {{/card.actions}}
     {{/paper-form}}
   {{/container.content}}

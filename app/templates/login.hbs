@@ -1,22 +1,32 @@
-{{#presenter-container class="layout-column flex" as |container|}}
+{{#presenter-container class="flex layout-column" as |container|}}
   {{#container.header}}
     {{#paper-toolbar-tools}}
       {{paper-button iconButton=true class="hidden"}}
-      <h2>S8-C</h2>
+      <h2>S8-C recommender engine</h2>
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
-  {{#container.content class="min-width-80 layout-column flex" as |card|}}
-    {{#paper-form class="layout-column flex" onSubmit=(action "login") as |form|}}
-      {{#card.content class="flex layout-column card-content"}}
-        {{form.input inputElementId="username" label="Username" value=username onChange=(action (mut username)) required=true passThru=(hash autocomplete="username")}}
-        {{form.input inputElementId="password" label="Password" value=password onChange=(action (mut password)) required=true type="password" passThru=(hash autocomplete="current-password")}}
+  {{#container.content class="flex layout-column min-width-70" as |card|}}
+    {{#paper-form class="flex layout-column" onSubmit=(action "login") as |form|}}
+      {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
+
+        <div class="show-gt-xs {{if showLogo "show-xs" "hide-xs"}} flex-gt-xs margin-top-auto margin-bottom-auto" style="text-align: center;">
+          <img src="https://www.specialprivacy.eu/images/illustrations/illustration-4.png" class="layout-fill md-padding"/>
+        </div>
+
+
+        <div class="flex md-padding flex-gt-sm layout-column">
+          {{form.input onFocus=(action "setShowLogo" false) onBlur=(action "setShowLogo" true) class="md-margin margin-top-auto" inputElementId="username" label="Username" value=username onChange=(action (mut username)) required=true passThru=(hash autocomplete="username")}}
+          {{form.input onFocus=(action "setShowLogo" false) onBlur=(action "setShowLogo" true) class="md-margin margin-bottom-auto" inputElementId="password" label="Password" value=password onChange=(action (mut password)) required=true type="password" passThru=(hash autocomplete="current-password")}}
+        </div>
+
       {{/card.content}}
 
       {{paper-divider}}
       {{#card.actions class="layout-row"}}
         {{#form.submit-button raised=true primary=true elementId="login" class="flex"}}Log in{{/form.submit-button}}
       {{/card.actions}}
+
     {{/paper-form}}
   {{/container.content}}
 

@@ -4,31 +4,31 @@
       {{#paper-button iconButton=true onClick=(action "goBack")}}
         {{paper-icon "keyboard_arrow_left"}}
       {{/paper-button}}
-      <h2>Setup complete</h2>
+      <h2>S8-C recommender engine</h2>
+      <span class="flex"></span>
+      <span>Setup 4/4</span>
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
-  {{#container.content class="min-width-80 layout-column flex" as |card|}}
-    {{#paper-form class="layout-column flex" onSubmit=(action "finishSetup") as |form|}}
-      {{#card.content class="flex layout-column card-content"}}
-        <div class="md-padding"><b>Your configuration is complete.</b></div>
+  {{#container.content class="min-width-70 layout-column flex" as |card|}}
+    {{#card.content class="flex layout-column card-content"}}
+      <div class="md-padding"><b>Your configuration is complete.</b></div>
 
-        <div class="md-padding">Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
+      <div class="md-padding">Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
 
-        <div class="md-padding">Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
+      <div class="md-padding">Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
 
-        <div class="md-padding">Click <b>Quit</b> to finish this setup.</div>
+      <div class="md-padding">Click <b>Quit</b> to finish this setup.</div>
 
-        <div class="md-padding">Have fun with the events recommendations!</div>
-      {{/card.content}}
+      <div class="md-padding">Have fun with the events recommendations!</div>
+    {{/card.content}}
 
-      {{paper-divider}}
-      {{#card.actions class="layout-row"}}
-        {{#form.submit-button raised=true primary=true class="flex"}}Finish setup{{/form.submit-button}}
-        {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
-        {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
-      {{/card.actions}}
-    {{/paper-form}}
+    {{paper-divider}}
+    {{#card.actions class="layout-row"}}
+      {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
+      {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
+      {{#paper-button raised=true primary=true class="flex" onClick=(action "finishSetup")}}Finish setup{{/paper-button}}
+    {{/card.actions}}
   {{/container.content}}
 
 {{/presenter-container}}

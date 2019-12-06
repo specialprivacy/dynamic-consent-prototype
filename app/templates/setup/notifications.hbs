@@ -4,21 +4,43 @@
       {{#paper-button iconButton=true onClick=(action "goBack")}}
         {{paper-icon "keyboard_arrow_left"}}
       {{/paper-button}}
-      <h2>Notification customization</h2>
+      <h2>S8-C recommender engine</h2>
       <span class="flex"></span>
-      <span>Step 3/3</span>
+      <span>Step 3/4</span>
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
-  {{#container.content class="min-width-80 layout-column flex" as |card|}}
+  {{#container.content class="min-width-70 layout-column flex" as |card|}}
     {{#paper-form class="layout-column flex" onSubmit=(action "proceed") as |form|}}
       {{#card.content class="flex layout-column card-content"}}
         <div class="layout-column md-padding">
-          <span>Thanks to the location data we collect, we can try to understand your interests and provide you with new categories based on the locations you have visited.</span>
-          <span>Would you like us to try and provide you with categories you seem to enjoy but have not yet recorded?</span>
+          <span class="md-padding">
+            Thanks to the location data we collect, we can try to understand your interests and provide you with new categories based on the locations you have visited.
+          </span>
+          <span class="md-padding">
+            Please select whether you want us to notify you when we discover a category you might be interested in and if you do, what their default behavior should be.
+          </span>
+
+          {{#paper-radio-group
+                  class="layout-column"
+                  groupValue=(readonly notificationMode)
+                  onChange=(action (mut notificationMode)) as |group|}}
+            {{#group.radio value="manual" primary=true}}
+              <b>Add manually</b>
+              <p>The category will only be added to your profile if you press <b>Yes</b> when the notification appears. If you ignore the notification, the category will not be added.</p>
+            {{/group.radio}}
+            {{#group.radio value="automatic" primary=true}}
+              <b>Add automatically</b>
+              <p>The category will be added to your profile unless you press <b>No</b> when the notification appears. If you ignore the notification, the category will be added.</p>
+            {{/group.radio}}
+            {{#group.radio value="none" primary=true}}
+              <b>No additional customization</b>
+              <p>Your location will not be used to tailor your preferences.</p>
+            {{/group.radio}}
+          {{/paper-radio-group}}
         </div>
 
-        <div class="layout-column md-padding">
+        <!--<div class="layout-column md-padding">
             <span>
               <b>Why</b>&nbsp;Apricot uses your location data:
             </span>
@@ -44,41 +66,13 @@
           <ul class="layout-column">
             <li>Until you revoke your consent or delete your account for the Apricot Event Recommender.</li>
           </ul>
-        </div>
-
-        {{paper-divider class="md-padding"}}
-
-        <div class="layout-column md-padding">
-            <span class="md-padding">
-              Please select&nbsp;<b>if and how</b>&nbsp;the event recommendations you receive should be customized via your TV-viewing interests.
-            </span>
-
-          {{#paper-radio-group
-                  class="layout-column"
-                  groupValue=(readonly notificationMode)
-                  onChange=(action (mut notificationMode)) as |group|}}
-            {{#group.radio value="manual" primary=true}}
-              <b>Add manually</b>
-              <p>You will receive notifications that will allow you to decide whether a category should be added to your preferences.</p>
-            {{/group.radio}}
-            {{#group.radio value="automatic" primary=true}}
-              <b>Add automatically</b>
-              <p>You will receive notifications to let you know when a new category has been added to your preferences.</p>
-            {{/group.radio}}
-            {{#group.radio value="none" primary=true}}
-              <b>No additional customization</b>
-              <p>Your location will not be used to tailor your preferences.</p>
-            {{/group.radio}}
-          {{/paper-radio-group}}
-        </div>
-
+        </div>-->
       {{/card.content}}
-
       {{paper-divider}}
       {{#card.actions class="layout-row"}}
-        {{#form.submit-button class="flex" raised=true primary=true}}Proceed{{/form.submit-button}}
         {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
         {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
+        {{#form.submit-button class="flex" raised=true primary=true}}Next{{/form.submit-button}}
       {{/card.actions}}
     {{/paper-form}}
 

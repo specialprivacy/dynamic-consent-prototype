@@ -7,6 +7,7 @@ export default Controller.extend({
   currentDataSubject: service(),
   username: alias("model.username"),
   password: alias("model.password"),
+  showLogo: true,
 
   actions: {
     login() {
@@ -23,6 +24,9 @@ export default Controller.extend({
         })
       });
       return false;
+    },
+    setShowLogo(bool) {
+      this.set("showLogo", bool);
     }
   }
 });

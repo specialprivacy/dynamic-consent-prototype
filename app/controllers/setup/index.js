@@ -3,7 +3,7 @@ import Controller from '@ember/controller';
 export default Controller.extend({
   actions: {
     proceed() {
-      return this.replaceRoute("setup.consents");
+      return this.transitionToRoute("setup.consents");
     }
   }
 });
