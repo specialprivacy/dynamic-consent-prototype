@@ -1,15 +1,22 @@
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
   hasOriginalPositionBeenSet: false,
-  zoom: 17,
+  zoom: 14,
   lat: null,
   lng: null,
   dataSubjectLat: null,
   dataSubjectLng: null,
   showCategories: false,
 
-  recommendations: Ember.computed.alias("model"),
+  locations: computed("model.locations", "categories.@each.selected", function(){
+    return this.model.locations.filter((location) => {
+      return location.categories.any((category) => { return category.selected });
+    });
+  }),
+  categories: alias("model.categories"),
 
   actions: {
     setOriginalPosition(position) {

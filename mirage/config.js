@@ -1,6 +1,8 @@
 import { Response } from "ember-cli-mirage";
 
 export default function() {
+  this.resource("category");
+  this.resource("location");
   this.resource("data-subject");
   this.resource("session");
   this.post("/sessions", function (schema, request) {

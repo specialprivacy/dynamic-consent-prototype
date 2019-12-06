@@ -6,8 +6,8 @@
       {{paper-button iconButton=true class="hidden"}}
       <h2>S8-C</h2>
       <span class="flex"></span>
-      {{#paper-button iconButton=true onClick=(action (mut showCategories))}}
-        {{paper-icon "category"}}
+      {{#paper-button iconButton=true onClick=(action (mut showCategories) true)}}
+        {{paper-icon "keyboard_arrow_left"}}
       {{/paper-button}}
     {{/paper-toolbar-tools}}
   {{/container.header}}
@@ -16,18 +16,29 @@
   {{#paper-sidenav-container class="flex layout-row"}}
 
     {{#paper-sidenav
-            class="md-whiteframe-z2"
             open=showCategories
-            lockedOpen=showCategories
-            onToggle=(action (mut showCategories))}}
+            position="right"
+            lockedOpen=false}}
       {{#paper-toolbar as |toolbar|}}
-        {{#paper-toolbar-tools}}Left Sidenav{{/paper-toolbar-tools}}
+        {{#paper-toolbar-tools}}
+          <div class="flex"/>
+          {{#paper-button iconButton=true onClick=(action (mut showCategories) false)}}
+            {{paper-icon "keyboard_arrow_right"}}
+          {{/paper-button}}
+        {{/paper-toolbar-tools}}
       {{/paper-toolbar}}
       {{#paper-content padding=true}}
-        Çup?
-        {{#paper-button iconButton=true onClick=(action (mut showCategories))}}
-          {{paper-icon "category"}}
-        {{/paper-button}}
+        {{#paper-list class="layout-column"}}
+          {{#paper-subheader}}Categories{{/paper-subheader}}
+          {{#each categories as |category index|}}
+            {{#if (not-eq index 0)}}
+              {{paper-divider}}
+            {{/if}}
+            {{#paper-checkbox primary=true class="md-padding" value=category.selected onChange=(action (mut category.selected) (not category.selected))}}
+              {{category.name}}
+            {{/paper-checkbox}}
+          {{/each}}
+        {{/paper-list}}
       {{/paper-content}}
     {{/paper-sidenav}}
 
@@ -46,7 +57,7 @@
                     iconSize=(array 40 40)
                     iconAnchor=(array 20 40)
                     popupAnchor=(array 0 -40)
-                    iconUrl="https://icon-library.net/images/google-maps-person-icon/google-maps-person-icon-6.jpg"}}
+                    iconUrl="/assets/images/red.svg"}}
               as |marker|>
               <marker.popup>
                 <h3>This is your current location.</h3>
@@ -54,11 +65,17 @@
             </layers.marker>
 
             <layers.marker-cluster as |cluster|>
-              {{#each recommendations as |recommendation|}}
-                <cluster.marker @location={{array recommendation.lat recommendation.lng}} as |marker|>
+              {{#each locations as |location|}}
+                <cluster.marker
+                  @icon={{icon
+                        iconSize=(array 40 40)
+                        iconAnchor=(array 20 40)
+                        popupAnchor=(array 0 -40)
+                        iconUrl=(if location.preferred "/assets/images/black-filled.svg" "/assets/images/black-empty.svg")}}
+                  @location={{array location.latitude location.longitude}} as |marker|>
                   <marker.popup>
-                    <h3>{{recommendation.title}}</h3>
-                    <span>{{recommendation.description}}</span>
+                    <h3>{{location.name}}</h3>
+                    <span>{{location.description}}</span>
                   </marker.popup>
                 </cluster.marker>
               {{/each}}
