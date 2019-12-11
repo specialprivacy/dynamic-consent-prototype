@@ -11,6 +11,22 @@ export default Route.extend({
     longitude: {
       refreshModel: true,
       replace: true
+    },
+    neLat: {
+      refreshModel: true,
+      replace: true
+    },
+    neLng: {
+      refreshModel: true,
+      replace: true
+    },
+    swLat: {
+      refreshModel: true,
+      replace: true
+    },
+    swLng: {
+      refreshModel: true,
+      replace: true
     }
   },
 

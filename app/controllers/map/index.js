@@ -3,7 +3,6 @@ import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  queryParams: ["latitude", "longitude"],
   showDialog: true,
   zoom: 14,
   mapLatitude: 0,
@@ -11,10 +10,22 @@ export default Controller.extend({
   latitude: 0,
   longitude: 0,
 
+  map: null,
 
   actions: {
+    onLoad(event) {
+      this.set("map", event.target);
+    },
     proceed() {
-      return this.transitionToRoute("map.view", { queryParams: { "latitude": this.latitude, "longitude": this.longitude } } );
+      const bounds = this.map.getBounds();
+      return this.transitionToRoute("map.view", { queryParams: {
+          "latitude": this.latitude,
+          "longitude": this.longitude,
+          "neLat": bounds._northEast.lat,
+          "neLng": bounds._northEast.lng,
+          "swLat": bounds._southWest.lat,
+          "swLng": bounds._southWest.lng,
+        } } );
     },
     useLocation() {
       navigator.geolocation.getCurrentPosition((position) => {

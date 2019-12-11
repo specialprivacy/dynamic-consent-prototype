@@ -15,11 +15,17 @@ export default function() {
     return schema.sessions.create(attrs);
   });
   this.get("/locations", function (schema, request) {
-    const lat = request.queryParams.latitude || 0;
-    const lng = request.queryParams.longitude || 0;
+    const neLat = request.queryParams.neLat || 0;
+    const neLng = request.queryParams.neLng || 0;
+    const swLat = request.queryParams.swLat || 0;
+    const swLng = request.queryParams.swLng || 0;
 
     return schema.locations.where((location) => {
-      return getDistanceFromLatLonInKm(lat, lng, location.coordinates.latitude, location.coordinates.longitude) < 5;
+      return location.coordinates.latitude > swLat &&
+        location.coordinates.latitude < neLat &&
+        location.coordinates.longitude > swLng &&
+        location.coordinates.longitude < neLng
+      //return getDistanceFromLatLonInKm(lat, lng, location.coordinates.latitude, location.coordinates.longitude) < 5;
     });
   });
 }
