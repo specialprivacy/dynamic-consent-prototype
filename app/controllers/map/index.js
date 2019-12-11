@@ -4,21 +4,18 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   showDialog: true,
-  zoom: 14,
-  mapLatitude: 0,
-  mapLongitude: 0,
-  latitude: 0,
-  longitude: 0,
+  zoom: 4,
+  mapLatitude: 54.5260,
+  mapLongitude: 15.2551,
+  latitude: null,
+  longitude: null,
 
   map: null,
 
   actions: {
-    onLoad(event) {
-      this.set("map", event.target);
-    },
     proceed() {
       const bounds = this.map.getBounds();
-      return this.transitionToRoute("map.view", { queryParams: {
+      return this.replaceRoute("map.view", { queryParams: {
           "latitude": this.latitude,
           "longitude": this.longitude,
           "neLat": bounds._northEast.lat,
@@ -27,21 +24,37 @@ export default Controller.extend({
           "swLng": bounds._southWest.lng,
         } } );
     },
-    useLocation() {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.set("mapLatitude", position.coords.latitude);
-        this.set("mapLongitude", position.coords.longitude);
-        this.set("latitude", position.coords.latitude);
-        this.set("longitude", position.coords.longitude);
-        this.set("showDialog", false);
-      });
+    onLoad(event) {
+      this.set("map", event.target);
+    },
+    useLocation(useDeviceLocation) {
+      if(useDeviceLocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.set("mapLatitude", position.coords.latitude);
+          this.set("mapLongitude", position.coords.longitude);
+          this.set("latitude", position.coords.latitude);
+          this.set("longitude", position.coords.longitude);
+          this.set("zoom", 14);
+        });
+      }
+      this.set("showDialog", false);
     },
     updateLocation(r, e) {
       let location = e.target.getLatLng();
-      console.log("updateLocation: " + location);
+      this.set("mapLatitude", location.lat);
+      this.set("mapLongitude", location.lng);
       this.set("latitude", location.lat);
       this.set("longitude", location.lng);
     },
+    onClick(mouseEvent) {
+      if(!this.latitude && !this.longitude) {
+        this.set("mapLatitude", mouseEvent.latlng.lat);
+        this.set("mapLongitude", mouseEvent.latlng.lng);
+        this.set("latitude", mouseEvent.latlng.lat);
+        this.set("longitude", mouseEvent.latlng.lng);
+      }
+      return false;
+    }
   }
 });
 
