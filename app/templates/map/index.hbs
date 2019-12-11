@@ -1,0 +1,63 @@
+{{#presenter-container class="layout-column flex" as |container|}}
+  {{#container.header}}
+    {{#paper-toolbar-tools}}
+      {{paper-button iconButton=true class="hidden"}}
+      <h2>S8-C recommender engine</h2>
+    {{/paper-toolbar-tools}}
+  {{/container.header}}
+
+  {{#container.content class="flex layout-column" as |card|}}
+    {{#card.content class="flex card-content"}}
+
+
+      {{#if showDialog}}
+        {{#paper-dialog class="flex-77" onClose=(action (mut showDialog) false) fullscreen=true clickOutsideToClose=true}}
+
+          {{#paper-dialog-content}}
+            <p>
+              We can use your device location to set the default area to search recommendations in. You can always move the marker elsewhere.
+            </p>
+          {{/paper-dialog-content}}
+
+          {{#paper-dialog-actions class="layout-row"}}
+            {{#paper-button onClick=(action "useLocation")}}Use my device location{{/paper-button}}
+            {{#paper-button onClick=(action (mut showDialog) false)}}I will provide the default location{{/paper-button}}
+          {{/paper-dialog-actions}}
+        {{/paper-dialog}}
+      {{/if}}
+
+      <LeafletMap @lat={{mapLatitude}} @lng={{mapLongitude}} @zoom={{zoom}} @class={{"layout-fill"}} as |layers|>
+        <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+
+        <layers.marker
+          @lat={{latitude}}
+          @lng={{longitude}}
+          @draggable={{true}}
+          @onDragend={{action "updateLocation" r}}
+          @icon={{icon
+                iconSize=(array 40 40)
+                iconAnchor=(array 20 40)
+                popupAnchor=(array 0 -40)
+                iconUrl="/assets/images/red.svg"}}
+          as |marker|>
+          <marker.popup>
+            <h3>This is your current location.</h3>
+          </marker.popup>
+        </layers.marker>
+      </LeafletMap>
+
+    {{/card.content}}
+
+
+    {{paper-divider}}
+    {{#card.actions class="layout-row"}}
+      {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
+      {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
+      {{#paper-button raised=true primary=true class="flex" onClick=(action "proceed")}}Proceed{{/paper-button}}
+    {{/card.actions}}
+
+  {{/container.content}}
+
+
+{{/presenter-container}}
+

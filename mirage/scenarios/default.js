@@ -32,6 +32,30 @@ export default function(server) {
     preferred: false
   });
 
+  server.create("location", {
+    name: "Brussels",
+    description: "Location in Brussels",
+    coordinates: { latitude: 50.844389, longitude: 4.355768},
+    categories: [art, nature, music, breweries],
+    preferred: false
+  });
+
+  server.create("location", {
+    name: "Liège",
+    description: "Location in Liège",
+    coordinates: { latitude: 50.626121, longitude: 5.565884},
+    categories: [art, nature, music, breweries],
+    preferred: true
+  });
+
+  server.create("location", {
+    name: "Paris",
+    description: "Location in Paris",
+    coordinates: { latitude: 48.810029, longitude: 2.317429},
+    categories: [art, nature, music, breweries],
+    preferred: false
+  });
+
   server.create("data-subject", {firstName: "Bernard", lastName: "Roger", hasCompletedSetup: true, username: "bernard", password: "roger", categories: [art, nature]});
   server.create("data-subject", {firstName: "Antoine", lastName: "Roger", hasCompletedSetup: false, username: "antoine", password: "roger", categories: [music, breweries]})
 }
