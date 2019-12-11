@@ -50,23 +50,22 @@
           @class={{"layout-fill"}} as |layers|>
           <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
-          <layers.marker
-            @lat={{latitude}}
-            @lng={{longitude}}
-            @draggable={{true}}
-            @onDragend={{action "updateLocation" r}}
-            @icon={{icon
-                  iconSize=(array 40 40)
-                  iconAnchor=(array 20 40)
-                  popupAnchor=(array 0 -40)
-                  iconUrl="/assets/images/red.svg"}}
-            as |marker|>
-            <marker.popup>
-              <h3>This is your current location.</h3>
-            </marker.popup>
-          </layers.marker>
 
-          <!--layers.circle @radius={{!radius}} @location={{!array latitude longitude}}/-->
+          {{#if (and latitude longitude)}}
+            <layers.marker
+              @lat={{latitude}}
+              @lng={{longitude}}
+              @icon={{icon
+                    iconSize=(array 40 40)
+                    iconAnchor=(array 20 40)
+                    popupAnchor=(array 0 -40)
+                    iconUrl="/assets/images/red.svg"}}
+              as |marker|>
+              <marker.popup>
+                <h3>This is your current location.</h3>
+              </marker.popup>
+            </layers.marker>
+          {{/if}}
 
           <layers.marker-cluster as |cluster|>
             {{#each locations as |location|}}

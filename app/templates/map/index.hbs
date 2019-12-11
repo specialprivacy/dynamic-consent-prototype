@@ -11,7 +11,7 @@
 
 
       {{#if showDialog}}
-        {{#paper-dialog class="flex-77" onClose=(action (mut showDialog) false) fullscreen=false clickOutsideToClose=true}}
+        {{#paper-dialog class="flex-77" onClose=(action (mut showDialog) false)}}
 
           {{#paper-dialog-content}}
             <p>
@@ -21,7 +21,24 @@
 
           {{#paper-dialog-actions class="layout-row"}}
             {{#paper-button onClick=(action "useLocation" true)}}Yes{{/paper-button}}
+            {{#paper-button elementId="yes-demo" onClick=(action (mut showDemo) true)}}Yes (demo){{/paper-button}}
             {{#paper-button onClick=(action "useLocation" false)}}No{{/paper-button}}
+          {{/paper-dialog-actions}}
+        {{/paper-dialog}}
+      {{/if}}
+      {{#if showDemo}}
+        {{#paper-dialog class="flex-77" onClose=(action (mut showDemo) false) origin="#yes-demo" clickOutsideToClose=true}}
+
+          {{#paper-dialog-content}}
+            <p>
+              Please select your current location.
+            </p>
+          {{/paper-dialog-content}}
+
+          {{#paper-dialog-actions class="layout-column"}}
+            {{#each demoLocations as |location|}}
+              {{#paper-button onClick=(action "usePredefinedLocation" location)}}{{location.title}}{{/paper-button}}
+            {{/each}}
           {{/paper-dialog-actions}}
         {{/paper-dialog}}
       {{/if}}
@@ -61,7 +78,6 @@
     {{#card.actions class="layout-row"}}
       {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
       {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
-      {{#paper-button raised=true primary=true class="flex" onClick=(action "proceed")}}Proceed{{/paper-button}}
     {{/card.actions}}
 
   {{/container.content}}

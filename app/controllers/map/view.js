@@ -27,7 +27,7 @@ export default Controller.extend({
   radius: 500,
   showCategories: false,
 
-  locations: computed("model.locations", "categories.@each.selected", function(){
+  locations: computed("model.locations", "model.locations.length", "categories.@each.selected", function(){
     return this.model.locations.filter((location) => {
       return location.categories.any((category) => { return category.selected });
     });
@@ -53,17 +53,10 @@ export default Controller.extend({
     },
 
     onMove() {
-      console.log("throttled")
       throttle(this, this.updateBounds, 1000);
     },
     onMoveEnd() {
-      console.log("debounced")
       debounce(this, this.updateBounds, 500);
-    },
-    updateLocation(r, e) {
-      let location = e.target.getLatLng();
-      this.set("latitude", location.lat);
-      this.set("longitude", location.lng);
     }
   }
 });
