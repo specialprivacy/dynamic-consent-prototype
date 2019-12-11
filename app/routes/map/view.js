@@ -1,3 +1,4 @@
+import { A } from '@ember/array';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 
@@ -5,35 +6,47 @@ export default Route.extend({
 
   queryParams: {
     latitude: {
-      refreshModel: true,
+      refreshModel: false,
       replace: true
     },
     longitude: {
-      refreshModel: true,
+      refreshModel: false,
       replace: true
     },
     neLat: {
-      refreshModel: true,
+      refreshModel: false,
       replace: true
     },
     neLng: {
-      refreshModel: true,
+      refreshModel: false,
       replace: true
     },
     swLat: {
-      refreshModel: true,
+      refreshModel: false,
       replace: true
     },
     swLng: {
-      refreshModel: true,
+      refreshModel: false,
       replace: true
     }
   },
 
   model(params) {
     return hash({
-      locations: this.store.query("location", params),
+      locations: A(),
       categories: this.store.findAll("category")
     });
+  },
+
+  actions: {
+    fetchLocations(neLat, neLng, swLat, swLng) {
+      return this.store.query("location", {neLat, neLng, swLat, swLng}).then(locations => {
+        locations.forEach(location => {
+          if(!this.controller.locations.includes(location)){
+            this.controller.locations.pushObject(location);
+          }
+        });
+      });
+    }
   }
 });

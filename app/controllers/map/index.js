@@ -4,9 +4,9 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   showDialog: true,
-  zoom: 4,
-  mapLatitude: 54.5260,
-  mapLongitude: 15.2551,
+  zoom: 12,
+  mapLatitude: 50.8503,
+  mapLongitude: 4.3517,
   latitude: null,
   longitude: null,
 
@@ -30,11 +30,10 @@ export default Controller.extend({
     useLocation(useDeviceLocation) {
       if(useDeviceLocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          this.set("mapLatitude", position.coords.latitude);
-          this.set("mapLongitude", position.coords.longitude);
           this.set("latitude", position.coords.latitude);
           this.set("longitude", position.coords.longitude);
-          this.set("zoom", 14);
+          this.set("mapLatitude", position.coords.latitude);
+          this.set("mapLongitude", position.coords.longitude);
         });
       }
       this.set("showDialog", false);

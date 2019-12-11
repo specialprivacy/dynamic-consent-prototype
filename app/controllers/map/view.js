@@ -1,6 +1,6 @@
 import { alias } from '@ember/object/computed';
 import { computed } from '@ember/object';
-import { throttle } from '@ember/runloop';
+import { debounce, throttle } from '@ember/runloop';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
@@ -43,30 +43,28 @@ export default Controller.extend({
     this.set("neLng", bounds._northEast.lng);
     this.set("swLat", bounds._southWest.lat);
     this.set("swLng", bounds._southWest.lng);
+    return this.send("fetchLocations", this.neLat, this.neLng, this.swLat, this.swLng);
   },
 
   actions: {
     onLoad(event) {
       this.set("map", event.target);
+      this.updateBounds();
     },
-    // onZoomEnd(event) {
-    //   const bounds = this.map.getBounds();
-    //   this.set("neLat", bounds._northEast.lat);
-    //   this.set("neLng", bounds._northEast.lng);
-    //   this.set("swLat", bounds._southWest.lat);
-    //   this.set("swLng", bounds._southWest.lng);
-    // },
+
     onMove() {
+      console.log("throttled")
       throttle(this, this.updateBounds, 1000);
     },
     onMoveEnd() {
-      this.updateBounds();
+      console.log("debounced")
+      debounce(this, this.updateBounds, 500);
     },
     updateLocation(r, e) {
       let location = e.target.getLatLng();
       this.set("latitude", location.lat);
       this.set("longitude", location.lng);
-    },
+    }
   }
 });
 
