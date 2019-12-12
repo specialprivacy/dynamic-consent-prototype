@@ -5,5 +5,6 @@ export default Model.extend({
   firstName: attr(),
   lastName: attr(),
   hasCompletedSetup: attr(),
-  categories: hasMany("category")
+  categories: hasMany("category"),
+  locations: hasMany("data-subject-location")
 });

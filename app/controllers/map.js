@@ -104,6 +104,7 @@ export default Controller.extend({
           this.set("mapLongitude", location.coordinates.longitude);
           this.set("hasLocationBeenSelected", true);
           this.set("showDemo", false);
+          this.send("addDataSubjectLocation", location);
         }).catch(error => {
           let errorMessage;
           switch(error.code) {

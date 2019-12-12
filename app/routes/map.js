@@ -23,6 +23,10 @@ export default Route.extend({
   },
 
   actions: {
+    addDataSubjectLocation(location) {
+      // TODO: Check if data subject accepted to store his location
+      return this.store.createRecord("data-subject-location", { coordinates: location.coordinates, dataSubject: this.currentDataSubject.currentDataSubject }).save();
+    },
     fetchLocations(neLat, neLng, swLat, swLng) {
       return this.store.query("location", {neLat, neLng, swLat, swLng}).then(locations => {
         locations.forEach(location => {

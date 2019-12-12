@@ -4,6 +4,7 @@ export default function() {
   this.resource("category");
   this.resource("location");
   this.resource("data-subject");
+  this.resource("data-subject-location");
   this.resource("session");
   this.post("/sessions", function (schema, request) {
     let attrs = this.normalizedRequestAttrs();
