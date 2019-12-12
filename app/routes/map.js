@@ -1,4 +1,6 @@
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
+import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 
 export default Route.extend({
@@ -10,6 +12,25 @@ export default Route.extend({
     }
     if(!this.currentDataSubject.currentDataSubject.hasCompletedSetup) {
       return this.replaceWith("setup");
+    }
+  },
+
+  model() {
+    return hash({
+      locations: A(),
+      categories: this.store.findAll("category")
+    });
+  },
+
+  actions: {
+    fetchLocations(neLat, neLng, swLat, swLng) {
+      return this.store.query("location", {neLat, neLng, swLat, swLng}).then(locations => {
+        locations.forEach(location => {
+          if(!this.controller.model.locations.includes(location)){
+            this.controller.model.locations.pushObject(location);
+          }
+        });
+      });
     }
   }
 });

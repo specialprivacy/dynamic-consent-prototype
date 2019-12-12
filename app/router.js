@@ -13,9 +13,7 @@ Router.map(function() {
     this.route('completed');
     this.route('consents');
   });
-  this.route('map', function() {
-    this.route('view');
-  });
+  this.route('map');
 });
 
 export default Router;
