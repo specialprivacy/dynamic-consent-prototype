@@ -25,18 +25,12 @@
                   class="layout-column"
                   groupValue=(readonly notificationMode)
                   onChange=(action (mut notificationMode)) as |group|}}
-            {{#group.radio value="manual" primary=true}}
-              <b>Add manually</b>
-              <p>The category will only be added to your profile if you press <b>Yes</b> when the notification appears. If you ignore the notification, the category will not be added.</p>
-            {{/group.radio}}
-            {{#group.radio value="automatic" primary=true}}
-              <b>Add automatically</b>
-              <p>The category will be added to your profile unless you press <b>No</b> when the notification appears. If you ignore the notification, the category will be added.</p>
-            {{/group.radio}}
-            {{#group.radio value="none" primary=true}}
-              <b>No additional customization</b>
-              <p>Your location will not be used to tailor your preferences.</p>
-            {{/group.radio}}
+            {{#each notificationModes as |mode|}}
+              {{#group.radio value=mode primary=true}}
+                <b>{{mode.label}}</b>
+                <p>{{mode.description}}</p>
+              {{/group.radio}}
+            {{/each}}
           {{/paper-radio-group}}
         </div>
 

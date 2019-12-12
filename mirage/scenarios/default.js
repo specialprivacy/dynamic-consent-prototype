@@ -1,4 +1,9 @@
 export default function(server) {
+
+  const manual = server.create("notification-mode", { id: "manual", label: "Add manually", description: "The category will only be added to your profile if you press \"Yes\" when the notification appears. If you ignore the notification, the category will not be added."});
+  const automatic = server.create("notification-mode", { id: "automatic", label: "Add automatically", description: "The category will be added to your profile unless you press \"No\" when the notification appears. If you ignore the notification, the category will be added."});
+  const disabled = server.create("notification-mode", { id: "disabled", label: "No additional customization", description: "Your location will not be used to tailor your preferences."});
+
   const art = server.create("category", {name: "Art"});
   const nature = server.create("category", {name: "Nature"});
   const music = server.create("category", {name: "Music"});
@@ -56,6 +61,6 @@ export default function(server) {
     preferred: false
   });
 
-  server.create("data-subject", {firstName: "Bernard", lastName: "Roger", hasCompletedSetup: true, username: "bernard", password: "roger", categories: [art, nature]});
-  server.create("data-subject", {firstName: "Antoine", lastName: "Roger", hasCompletedSetup: false, username: "antoine", password: "roger", categories: [music, breweries]})
+  server.create("data-subject", {firstName: "Bernard", lastName: "Roger", hasCompletedSetup: true, username: "bernard", password: "roger", notificationMode: automatic, categories: [art, nature]});
+  server.create("data-subject", {firstName: "Antoine", lastName: "Roger", hasCompletedSetup: false, username: "antoine", password: "roger", notificationMode: disabled, categories: [music, breweries]})
 }
