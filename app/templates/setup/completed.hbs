@@ -11,16 +11,22 @@
   {{/container.header}}
 
   {{#container.content class="min-width-70 layout-column flex" as |card|}}
-    {{#card.content class="flex layout-column card-content"}}
-      <div class="md-padding"><b>Your configuration is complete.</b></div>
+    {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
+      <div class="md-padding margin-auto flex-gt-xs" style="text-align:center;">
+        <img src="/assets/images/sightsee_4.jpg" style="max-height:100%;max-width:100%;"/>
+      </div>
 
-      <div class="md-padding">Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
+      <div class="flex layout-column margin-auto">
+        <div class="md-padding"><b>Your configuration is complete.</b></div>
 
-      <div class="md-padding">Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
+        <div class="md-padding">Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
 
-      <div class="md-padding">Click <b>Quit</b> to finish this setup.</div>
+        <div class="md-padding">Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
 
-      <div class="md-padding">Have fun with the events recommendations!</div>
+        <div class="md-padding">Click <b>Quit</b> to finish this setup.</div>
+
+        <div class="md-padding">Have fun with the events recommendations!</div>
+      </div>
     {{/card.content}}
 
     {{paper-divider}}

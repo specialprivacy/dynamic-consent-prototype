@@ -12,21 +12,21 @@
     {{#paper-form class="flex layout-column" onSubmit=(action "proceed") as |form|}}
       {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
 
-        <div class="md-padding margin-auto">
-          <img src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="max-height:100%;max-width:100%;"/>
+        <div class="md-padding margin-auto flex-gt-xs" style="text-align:center;">
+          <img src="/assets/images/sightsee_1.jpg" style="max-height:100%;max-width:100%;"/>
         </div>
 
-        <div class="flex layout-column">
+        <div class="flex layout-column margin-auto">
           <div class="md-padding">
             Thank your for choosing our free sightseeing recommendation service, which will provide you with locations to check out.
           </div>
 
           <div class="md-padding">
-            You can check the privacy policy by clicking the {{#paper-button raised=true primary=true}}Privacy policy{{/paper-button}} button.
+            You can check the privacy policy by clicking the {{#paper-button raised=true primary=true mini=true fab=false}}Privacy policy{{/paper-button}} button.
           </div>
 
           <div class="md-padding">
-            At any time, you can check what data we are processing by clicking the {{#paper-button raised=true primary=true}}Dashboard{{/paper-button}} button.
+            At any time, you can check what data we are processing by clicking the {{#paper-button raised=true primary=true mini=true fab=false}}Dashboard{{/paper-button}} button.
           </div>
 
           <div class="md-padding">

@@ -12,14 +12,20 @@
 
   {{#container.content class="min-width-70 layout-column flex" as |card|}}
     {{#paper-form class="layout-column flex" onSubmit=(action "proceed") as |form|}}
-      {{#card.content class="flex layout-column card-content"}}
-        <div class="md-padding">
-          At Apricot, we care about your data and we want to make sure you know how and why we are using it.
+      {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
+        <div class="md-padding margin-auto flex-gt-xs" style="text-align:center;">
+          <img src="/assets/images/sightsee_2.jpg" style="max-height:100%;max-width:100%;"/>
         </div>
 
-        <div class="md-padding">
-          In order to be more transparent, we are using a new method to ask for your consent before using any data of yours.
-          On the next screen, we will let you configure how you want us to contact you.
+        <div class="flex layout-column margin-auto">
+          <div class="md-padding">
+            At Apricot, we care about your data and we want to make sure you know how and why we are using it.
+          </div>
+
+          <div class="md-padding">
+            In order to be more transparent, we are using a new method to ask for your consent before using any data of yours.
+            On the next screen, we will let you configure how you want us to contact you.
+          </div>
         </div>
 
       {{/card.content}}

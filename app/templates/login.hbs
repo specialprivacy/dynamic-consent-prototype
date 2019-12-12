@@ -10,12 +10,12 @@
     {{#paper-form class="flex layout-column" onSubmit=(action "login") as |form|}}
       {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
 
-        <div class="show-gt-xs {{if showLogo "show-xs" "hide-xs"}} flex-gt-xs margin-top-auto margin-bottom-auto" style="text-align: center;">
-          <img src="https://www.specialprivacy.eu/images/illustrations/illustration-4.png" class="layout-fill md-padding"/>
+        <div class="md-padding margin-auto flex-gt-xs show-gt-xs {{if showLogo "show-xs" "hide-xs"}}" style="text-align:center;">
+          <img src="/assets/images/special_logo_alpha.png" style="max-height:70VH;max-width: 70VW;"/>
         </div>
 
 
-        <div class="flex md-padding flex-gt-sm layout-column">
+        <div class="flex md-padding flex-gt-sm layout-column margin-auto">
           {{form.input onFocus=(action "setShowLogo" false) onBlur=(action "setShowLogo" true) class="md-margin margin-top-auto" inputElementId="username" label="Username" value=username onChange=(action (mut username)) required=true passThru=(hash autocomplete="username")}}
           {{form.input onFocus=(action "setShowLogo" false) onBlur=(action "setShowLogo" true) class="md-margin margin-bottom-auto" inputElementId="password" label="Password" value=password onChange=(action (mut password)) required=true type="password" passThru=(hash autocomplete="current-password")}}
         </div>
