@@ -13,8 +13,9 @@
   {{#container.content class="min-width-70 layout-column flex" as |card|}}
     {{#paper-form class="layout-column flex" onSubmit=(action "proceed") as |form|}}
       {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
-        <div class="md-padding margin-auto flex-gt-xs" style="text-align:center;">
-          <img src="/assets/images/sightsee_2.jpg" style="max-height:100%;max-width:100%;"/>
+
+        <div class="md-padding flex flex-xs-40" style="text-align:center;position: relative;background: #EEE;">
+          <img src="/assets/images/sightsee_2.jpg" class="layout-fill" style="width:100%;height:100%; position: absolute;top:0;left:0;"/>
         </div>
 
         <div class="flex layout-column margin-auto">
