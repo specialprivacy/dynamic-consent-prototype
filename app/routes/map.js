@@ -22,11 +22,17 @@ export default Route.extend({
     });
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set("map", null);
+    controller.set("hasLocationBeenSelected", false);
+  },
+
   actions: {
     addDataSubjectLocation(location) {
       return this.store.findRecord("notification-mode", this.currentDataSubject.currentDataSubject.belongsTo("notificationMode").id()).then(notificationMode => {
         if(notificationMode.id !== "disabled") {
-          return this.store.createRecord("data-subject-location", { coordinates: location.coordinates, dataSubject: this.currentDataSubject.currentDataSubject }).save();
+          return this.store.createRecord("data-subject-location", { timestamp: new Date(), coordinates: location.coordinates, dataSubject: this.currentDataSubject.currentDataSubject }).save();
         }
       })
     },

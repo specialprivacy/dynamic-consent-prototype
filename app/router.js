@@ -14,6 +14,10 @@ Router.map(function() {
     this.route('consents');
   });
   this.route('map');
+  this.route('dashboard', function() {
+    this.route('categories');
+    this.route('locations');
+  });
 });
 
 export default Router;

@@ -27,7 +27,10 @@ export default Controller.extend({
   map: null,
 
   updateBounds() {
-    if(!this.map || !this.hasLocationBeenSelected) return;
+    if(!this.map || !this.hasLocationBeenSelected) {
+      console.log("No can do.");
+      return;
+    }
     const bounds = this.map.getBounds();
     this.set("neLat", bounds._northEast.lat);
     this.set("neLng", bounds._northEast.lng);

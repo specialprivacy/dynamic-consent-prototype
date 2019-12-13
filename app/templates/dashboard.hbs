@@ -1,0 +1,31 @@
+{{#presenter-container class="layout-column flex" as |container|}}
+  {{#container.header}}
+    {{#paper-toolbar-tools}}
+      {{#paper-button iconButton=true onClick=(action "goBack")}}
+        {{paper-icon "arrow_left_alt"}}
+      {{/paper-button}}
+      <h2>Dashboard</h2>
+    {{/paper-toolbar-tools}}
+  {{/container.header}}
+
+  {{#container.content class="min-width-70 flex" as |card|}}
+    {{#card.content class="flex layout-column card-content"}}
+
+      {{#paper-tabs selected=(readonly currentRouteName) borderBottom=true as |tabs|}}
+        {{#tabs.tab value="dashboard.locations" href=(href-to "dashboard.locations")}}
+          Locations
+        {{/tabs.tab}}
+        {{#tabs.tab value="dashboard.categories" href=(href-to "dashboard.categories")}}
+          Categories
+        {{/tabs.tab}}
+      {{/paper-tabs}}
+
+      {{outlet}}
+
+
+    {{/card.content}}
+  {{/container.content}}
+
+{{/presenter-container}}
+
+{{paper-toaster}}

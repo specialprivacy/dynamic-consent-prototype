@@ -1,0 +1,10 @@
+{{#paper-list class="layout-column"}}
+  {{#each categories as |category index|}}
+    {{#if (not-eq index 0)}}
+      {{paper-divider}}
+    {{/if}}
+    {{category.name}}
+  {{else}}
+    We did not infer any interest for any categories from your locations.
+  {{/each}}
+{{/paper-list}}
