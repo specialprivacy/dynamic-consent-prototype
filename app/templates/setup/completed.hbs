@@ -33,7 +33,7 @@
     {{paper-divider}}
     {{#card.actions class="layout-row"}}
       {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
-      {{#paper-button raised=true primary=true class="flex"}}Dashboard{{/paper-button}}
+      {{#paper-button raised=true primary=true class="flex" href=(href-to "dashboard")}}Dashboard{{/paper-button}}
       {{#paper-button raised=true primary=true class="flex" onClick=(action "finishSetup")}}Finish setup{{/paper-button}}
     {{/card.actions}}
   {{/container.content}}

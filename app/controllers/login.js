@@ -17,7 +17,7 @@ export default Controller.extend({
         return session.get("dataSubject");
       }).then(dataSubject => {
         this.currentDataSubject.currentDataSubject = dataSubject;
-        this.replaceRoute("dashboard");
+        this.replaceRoute("map");
       }).catch((ex) => {
         ex.errors.forEach(error => {
           this.paperToaster.show(error, { toastClass: "error-toast"});
