@@ -3,21 +3,21 @@
   @class={{"flex layout-fill"}} as |layers|>
   <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
-    {{#each locations as |location|}}
 
-      <layers.marker
-        @lat={{location.latitude}}
-        @lng={{location.longitude}}
+  <layers.marker-cluster as |cluster|>
+    {{#each locations as |location|}}
+      <cluster.marker
         @icon={{icon
               iconSize=(array 40 40)
               iconAnchor=(array 20 40)
               popupAnchor=(array 0 -40)
               iconUrl="/assets/images/red.svg"}}
-        as |marker|>
+        @location={{array location.latitude location.longitude}} as |marker|>
         <marker.popup>
           <h3>{{location.timestamp}}</h3>
         </marker.popup>
-      </layers.marker>
+      </cluster.marker>
     {{/each}}
+  </layers.marker-cluster>
 
 </LeafletMap>
