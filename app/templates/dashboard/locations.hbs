@@ -14,7 +14,7 @@
               iconUrl="/assets/images/red.svg"}}
         @location={{array location.latitude location.longitude}} as |marker|>
         <marker.popup>
-          <h3>{{moment-calendar location.timestamp}}</h3>
+          <h3>{{moment-calendar location.timestamp (hash sameElse="DD/MM/YYYY")}}</h3>
         </marker.popup>
       </cluster.marker>
     {{/each}}
