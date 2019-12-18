@@ -49,7 +49,23 @@
           @onLoad={{action "onLoad"}}
           @onMove={{action "onMove"}}
           @onMoveend={{action "onMoveEnd"}}
-          @class={{"layout-fill"}} as |layers|>
+          @onZoomend={{action "onZoomEnd"}}
+          @class={{"layout-fill"}} as |layers|
+        >
+
+          <div class="map-actions layout-column">
+            {{#if (and latitude longitude)}}
+              {{#paper-button iconButton=true primary=true title="Move to current location." onClick=(action "onMoveToCurrentLocation")}}
+                {{paper-icon "my_location"}}
+              {{/paper-button}}
+            {{/if}}
+
+          {{#if (not isMapZoomedEnough)}}
+            {{#paper-button iconButton=true warn=true title="Please zoom in closer so we can fetch recommendations." onClick=(action "onZoomToMinimalLevel")}}
+              {{paper-icon "gps_off"}}
+            {{/paper-button}}
+          {{/if}}
+          </div>
           <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
 
@@ -78,9 +94,21 @@
                       popupAnchor=(array 0 -40)
                       iconUrl=(if location.preferred "/assets/images/black-filled.svg" "/assets/images/black-empty.svg")}}
                 @location={{array location.latitude location.longitude}} as |marker|>
-                <marker.popup>
+                <marker.popup
+                  @autoPan={{true}}
+                  @keepInView={{true}}
+                  @onAdd={{action "onPopupToggle" true}}
+                  @onRemove={{action "onPopupToggle" false}}
+                >
                   <h3>{{location.name}}</h3>
-                  <span>{{location.description}}</span>
+                  <div>
+                    {{#each location.categories as |category index|}}
+                      {{#if (not-eq index 0)}}
+                      -
+                      {{/if}}
+                      {{category.name}}
+                    {{/each}}
+                  </div>
                 </marker.popup>
               </cluster.marker>
             {{/each}}

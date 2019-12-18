@@ -37,7 +37,7 @@ export default Route.extend({
       })
     },
     fetchLocations(neLat, neLng, swLat, swLng) {
-      return this.store.query("location", {neLat, neLng, swLat, swLng}).then(locations => {
+      return this.store.query("location", { neLat, neLng, swLat, swLng, dataSubjectId: this.currentDataSubject.currentDataSubject.id }).then(locations => {
         locations.forEach(location => {
           if(!this.controller.model.locations.includes(location)){
             this.controller.model.locations.pushObject(location);

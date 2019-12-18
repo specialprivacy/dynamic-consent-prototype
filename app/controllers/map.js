@@ -9,6 +9,8 @@ export default Controller.extend({
   paperToaster: service(),
 
   zoom: 14,
+  minimalZoomForFetch: 14,
+  isMapZoomedEnough: true,
   mapLatitude: 50.8503,
   mapLongitude: 4.3517,
   latitude: null,
@@ -28,9 +30,20 @@ export default Controller.extend({
 
   updateBounds() {
     if(!this.map || !this.hasLocationBeenSelected) {
-      console.log("No can do.");
       return;
     }
+
+    if(this.isPopupShown) {
+      return;
+    }
+
+    // Don't fetch anything if we're not zoomed in enough
+    if(this.map.getZoom() < this.minimalZoomForFetch) {
+      this.set("isMapZoomedEnough", false);
+      return;
+    }
+    this.set("isMapZoomedEnough", true);
+
     const bounds = this.map.getBounds();
     this.set("neLat", bounds._northEast.lat);
     this.set("neLng", bounds._northEast.lng);
@@ -87,10 +100,25 @@ export default Controller.extend({
   }),
 
   actions: {
+    onZoomEnd() {
+      if(this.map && this.map.getZoom() < this.minimalZoomForFetch) {
+        this.set("isMapZoomedEnough", false);
+        return;
+      }
+      this.set("isMapZoomedEnough", true);
+    },
+    onPopupToggle(bool) {
+      this.set("isPopupShown", bool);
+    },
+    onMoveToCurrentLocation() {
+      this.map.panTo([this.latitude, this.longitude]);
+    },
+    onZoomToMinimalLevel() {
+      this.map.setZoom(this.minimalZoomForFetch);
+    },
     onLoad(event) {
       this.set("map", event.target);
     },
-
     onMove() {
       throttle(this, this.updateBounds, 1000);
     },
