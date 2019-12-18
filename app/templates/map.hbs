@@ -33,10 +33,13 @@
               {{paper-divider}}
             {{/if}}
             {{#paper-checkbox primary=true class="md-padding" value=category.selected onChange=(action (mut category.selected) (not category.selected))}}
+              <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
+              -
               {{category.name}}
             {{/paper-checkbox}}
           {{/each}}
         {{/paper-list}}
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       {{/paper-content}}
     {{/paper-sidenav}}
 
@@ -89,10 +92,10 @@
             {{#each locations as |location|}}
               <cluster.marker
                 @icon={{icon
-                      iconSize=(array 40 40)
-                      iconAnchor=(array 20 40)
-                      popupAnchor=(array 0 -40)
-                      iconUrl=(if location.preferred "/assets/images/black-filled.svg" "/assets/images/black-empty.svg")}}
+                      iconSize=(array 20 20)
+                      iconAnchor=(array 10 20)
+                      popupAnchor=(array 0 -20)
+                      iconUrl=location.categories.firstObject.icon}}
                 @location={{array location.latitude location.longitude}} as |marker|>
                 <marker.popup
                   @autoPan={{true}}
@@ -101,13 +104,10 @@
                   @onRemove={{action "onPopupToggle" false}}
                 >
                   <h3>{{location.name}}</h3>
-                  <div>
-                    {{#each location.categories as |category index|}}
-                      {{#if (not-eq index 0)}}
-                      -
-                      {{/if}}
-                      {{category.name}}
-                    {{/each}}
+                  <div class="layout-row">
+                      {{#each location.categories as |category index|}}
+                        <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
+                      {{/each}}
                   </div>
                 </marker.popup>
               </cluster.marker>
