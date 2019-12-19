@@ -6,6 +6,7 @@ export default Model.extend({
   timestamp: attr(),
   coordinates: attr(),
   dataSubject: belongsTo("data-subject"),
+  inferredCategory: belongsTo("category"),
 
   latitude: alias("coordinates.latitude"),
   longitude: alias("coordinates.longitude")

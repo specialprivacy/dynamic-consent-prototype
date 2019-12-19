@@ -23,8 +23,8 @@ export default function(server) {
   const bernard = server.create("data-subject", {firstName: "Bernard", lastName: "Roger", hasCompletedSetup: true, username: "bernard", password: "roger", notificationMode: automatic, categories: [art, nature]});
   server.create("data-subject", {firstName: "Antoine", lastName: "Roger", hasCompletedSetup: false, username: "antoine", password: "roger", notificationMode: disabled, categories: []})
 
-  server.create("data-subject-location", { timestamp: new Date(2019, 1, 30, 10), coordinates: { latitude: 48.2082, longitude: 16.3738 }, dataSubject: bernard });
-  server.create("data-subject-location", { timestamp: new Date(2019, 4, 14, 12), coordinates: { latitude: 40.8518, longitude: 14.2681 }, dataSubject: bernard });
-  server.create("data-subject-location", { timestamp: new Date(2019, 9, 9, 9), coordinates: { latitude: 43.7102, longitude: 7.2620 }, dataSubject: bernard });
+  server.create("data-subject-location", { timestamp: new Date(2019, 1, 30, 10), coordinates: { latitude: 48.2082, longitude: 16.3738 }, dataSubject: bernard, inferredCategory: historic });
+  server.create("data-subject-location", { timestamp: new Date(2019, 4, 14, 12), coordinates: { latitude: 40.8518, longitude: 14.2681 }, dataSubject: bernard, inferredCategory: music });
+  server.create("data-subject-location", { timestamp: new Date(2019, 9, 9, 9), coordinates: { latitude: 43.7102, longitude: 7.2620 }, dataSubject: bernard, inferredCategory: breweries });
   server.create("data-subject-location", { timestamp: new Date(2019, 9, 12, 18), coordinates: { latitude: 60.1699, longitude: 24.9384 }, dataSubject: bernard });
 }
