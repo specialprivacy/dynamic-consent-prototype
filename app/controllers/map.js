@@ -23,6 +23,7 @@ export default Controller.extend({
   showCategories: false,
   hasLocationBeenSelected: false,
   showLocationPicker: not("hasLocationBeenSelected"),
+  isFetchingLocations: false,
 
   locations: computed("model.locations", "model.locations.length", "categories.@each.selected", function(){
     return this.model.locations.filter((location) => {

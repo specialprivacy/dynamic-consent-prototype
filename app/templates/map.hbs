@@ -80,9 +80,15 @@
                 {{paper-icon "gps_off"}}
               {{/paper-button}}
             {{/if}}
-          </div>
-          <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
+            {{#if isFetchingLocations}}
+              {{#paper-button iconButton=true title="Fetching recommendations..."}}
+                {{paper-progress-circular class="md-hue-2" diameter=25}}
+              {{/paper-button}}
+            {{/if}}
+          </div>
+
+          <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
           {{#if (and latitude longitude)}}
             <layers.marker

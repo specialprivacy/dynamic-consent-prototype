@@ -47,12 +47,14 @@ export default Route.extend({
       })
     },
     fetchLocations(neLat, neLng, swLat, swLng) {
+      this.controller.set("isFetchingLocations", true);
       return this.store.query("location", { neLat, neLng, swLat, swLng, dataSubjectId: this.currentDataSubject.currentDataSubject.id }).then(locations => {
         locations.forEach(location => {
           if(!this.controller.model.locations.includes(location)){
             this.controller.model.locations.pushObject(location);
           }
         });
+        this.controller.set("isFetchingLocations", false);
       });
     }
   }
