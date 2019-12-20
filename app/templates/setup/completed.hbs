@@ -2,11 +2,26 @@
   {{#container.header}}
     {{#paper-toolbar-tools}}
       {{#paper-button iconButton=true onClick=(action "goBack")}}
-        {{paper-icon "arrow_left_alt"}}
+        {{paper-icon "arrow_back"}}
       {{/paper-button}}
-      <h2>S8-C recommender engine</h2>
-      <span class="flex"></span>
+      <h2 class="flex">S8-C recommender engine</h2>
       <span>4/4</span>
+      {{#paper-menu as |menu|}}
+        {{#menu.trigger}}
+          {{#paper-button iconButton=true}}
+            {{paper-icon "account_circle"}}
+          {{/paper-button}}
+        {{/menu.trigger}}
+        {{#menu.content width=4 as |content|}}
+          {{#content.menu-item href=(href-to "dashboard")}}
+            {{paper-icon "dashboard"}}
+            <span>Dashboard</span>
+          {{/content.menu-item}}
+        {{/menu.content}}
+      {{/paper-menu}}
+      {{#paper-button iconButton=true onClick=(action "finishSetup")}}
+        {{paper-icon "done"}}
+      {{/paper-button}}
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
@@ -29,13 +44,6 @@
         <div class="md-padding">Have fun with the events recommendations!</div>
       </div>
     {{/card.content}}
-
-    {{paper-divider}}
-    {{#card.actions class="layout-row"}}
-      {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
-      {{#paper-button raised=true primary=true class="flex" href=(href-to "dashboard")}}Dashboard{{/paper-button}}
-      {{#paper-button raised=true primary=true class="flex" onClick=(action "finishSetup")}}Finish setup{{/paper-button}}
-    {{/card.actions}}
   {{/container.content}}
 
 {{/presenter-container}}

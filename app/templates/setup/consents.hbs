@@ -2,42 +2,48 @@
   {{#container.header}}
     {{#paper-toolbar-tools}}
       {{#paper-button iconButton=true onClick=(action "goBack")}}
-        {{paper-icon "arrow_left_alt"}}
+        {{paper-icon "arrow_back"}}
       {{/paper-button}}
-      <h2>S8-C recommender engine</h2>
-      <span class="flex"></span>
+      <h2 class="flex">S8-C recommender engine</h2>
       <span>2/4</span>
+      {{#paper-menu as |menu|}}
+        {{#menu.trigger}}
+          {{#paper-button iconButton=true}}
+            {{paper-icon "account_circle"}}
+          {{/paper-button}}
+        {{/menu.trigger}}
+        {{#menu.content width=4 as |content|}}
+          {{#content.menu-item href=(href-to "dashboard")}}
+            {{paper-icon "dashboard"}}
+            <span>Dashboard</span>
+          {{/content.menu-item}}
+        {{/menu.content}}
+      {{/paper-menu}}
+      {{#paper-button iconButton=true onClick=(action "proceed")}}
+        {{paper-icon "arrow_forward"}}
+      {{/paper-button}}
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
   {{#container.content class="min-width-70 layout-column flex" as |card|}}
-    {{#paper-form class="layout-column flex" onSubmit=(action "proceed") as |form|}}
-      {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
+    {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
 
-        <div class="md-padding flex flex-xs-40" style="text-align:center;position: relative;background: #EEE;">
-          <img src="/assets/images/sightsee_2.jpg" class="layout-fill" style="width:100%;height:100%; position: absolute;top:0;left:0;"/>
+      <div class="md-padding flex flex-xs-40" style="text-align:center;position: relative;background: #EEE;">
+        <img src="/assets/images/sightsee_2.jpg" class="layout-fill" style="width:100%;height:100%; position: absolute;top:0;left:0;"/>
+      </div>
+
+      <div class="flex layout-column margin-auto">
+        <div class="md-padding">
+          At Apricot, we care about your data and we want to make sure you know how and why we are using it.
         </div>
 
-        <div class="flex layout-column margin-auto">
-          <div class="md-padding">
-            At Apricot, we care about your data and we want to make sure you know how and why we are using it.
-          </div>
-
-          <div class="md-padding">
-            In order to be more transparent, we are using a new method to ask for your consent before using any data of yours.
-            On the next screen, we will let you configure how you want us to contact you.
-          </div>
+        <div class="md-padding">
+          In order to be more transparent, we are using a new method to ask for your consent before using any data of yours.
+          On the next screen, we will let you configure how you want us to contact you.
         </div>
+      </div>
 
-      {{/card.content}}
-
-      {{paper-divider}}
-      {{#card.actions class="layout-row"}}
-        {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
-        {{#paper-button raised=true primary=true class="flex" href=(href-to "dashboard")}}Dashboard{{/paper-button}}
-        {{#form.submit-button raised=true primary=true class="flex"}}Next{{/form.submit-button}}
-      {{/card.actions}}
-    {{/paper-form}}
+    {{/card.content}}
   {{/container.content}}
 
 {{/presenter-container}}

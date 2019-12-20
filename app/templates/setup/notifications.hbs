@@ -2,47 +2,53 @@
   {{#container.header}}
     {{#paper-toolbar-tools}}
       {{#paper-button iconButton=true onClick=(action "goBack")}}
-        {{paper-icon "arrow_left_alt"}}
+        {{paper-icon "arrow_back"}}
       {{/paper-button}}
-      <h2>S8-C recommender engine</h2>
-      <span class="flex"></span>
+      <h2 class="flex">S8-C recommender engine</h2>
       <span>3/4</span>
+      {{#paper-menu as |menu|}}
+        {{#menu.trigger}}
+          {{#paper-button iconButton=true}}
+            {{paper-icon "account_circle"}}
+          {{/paper-button}}
+        {{/menu.trigger}}
+        {{#menu.content width=4 as |content|}}
+          {{#content.menu-item href=(href-to "dashboard")}}
+            {{paper-icon "dashboard"}}
+            <span>Dashboard</span>
+          {{/content.menu-item}}
+        {{/menu.content}}
+      {{/paper-menu}}
+      {{#paper-button iconButton=true onClick=(action "proceed")}}
+        {{paper-icon "arrow_forward"}}
+      {{/paper-button}}
     {{/paper-toolbar-tools}}
   {{/container.header}}
 
   {{#container.content class="min-width-70 layout-column flex" as |card|}}
-    {{#paper-form class="layout-column flex" onSubmit=(action "proceed") as |form|}}
-      {{#card.content class="flex layout-column card-content"}}
-        <div class="layout-column margin-auto">
-          <span class="md-padding">
-            Thanks to the location data we collect, we can try to understand your interests and provide you with new categories based on the locations you have visited.
-          </span>
-          <span class="md-padding">
-            Please select whether you want us to notify you when we discover a category you might be interested in and if you do, what their default behavior should be.
-          </span>
+    {{#card.content class="flex layout-column card-content"}}
+      <div class="layout-column margin-auto">
+        <span class="md-padding">
+          Thanks to the location data we collect, we can try to understand your interests and provide you with new categories based on the locations you have visited.
+        </span>
+        <span class="md-padding">
+          Please select whether you want us to notify you when we discover a category you might be interested in and if you do, what their default behavior should be.
+        </span>
 
-          {{#paper-radio-group
-                  class="layout-column"
-                  groupValue=(readonly notificationMode)
-                  onChange=(action (mut notificationMode)) as |group|}}
-            {{#each notificationModes as |mode|}}
-              {{#group.radio value=mode primary=true}}
-                <b>{{mode.label}}</b>
-                <p>{{mode.description}}</p>
-              {{/group.radio}}
-            {{/each}}
-          {{/paper-radio-group}}
-        </div>
+        {{#paper-radio-group
+                class="layout-column"
+                groupValue=(readonly notificationMode)
+                onChange=(action (mut notificationMode)) as |group|}}
+          {{#each notificationModes as |mode|}}
+            {{#group.radio value=mode primary=true}}
+              <b>{{mode.label}}</b>
+              <p>{{mode.description}}</p>
+            {{/group.radio}}
+          {{/each}}
+        {{/paper-radio-group}}
+      </div>
 
-      {{/card.content}}
-      {{paper-divider}}
-      {{#card.actions class="layout-row"}}
-        {{#paper-button raised=true primary=true class="flex"}}Privacy policy{{/paper-button}}
-        {{#paper-button raised=true primary=true class="flex" href=(href-to "dashboard")}}Dashboard{{/paper-button}}
-        {{#form.submit-button class="flex" raised=true primary=true}}Next{{/form.submit-button}}
-      {{/card.actions}}
-    {{/paper-form}}
-
+    {{/card.content}}
   {{/container.content}}
 
 {{/presenter-container}}
