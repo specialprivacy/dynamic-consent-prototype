@@ -52,9 +52,6 @@ FILTER(?category IN (
 
 ))
 
-  ?uri <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
-  ?uri <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?lng .
-
   ?uri geom:geometry [ogc:asWKT ?g] .
 
   FILTER(bif:st_intersects (?g, bif:st_point (${attrs.coordinates.longitude}, ${attrs.coordinates.latitude}), 0.00001)) .
@@ -108,7 +105,13 @@ FILTER(?category IN (
     const params = new URLSearchParams();
 
     params.append("query", `
-        SELECT ?uri ?lat ?lng ?name (GROUP_CONCAT(?category;separator=",") as ?categories)
+        Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix ogc: <http://www.opengis.net/ont/geosparql#>
+Prefix geom: <http://geovocab.org/geometry#>
+Prefix lgdo: <http://linkedgeodata.org/ontology/>
+
+
+SELECT ?uri ?name ?geo (GROUP_CONCAT(?category;separator=",") as ?categories)
 WHERE
 {
 ?uri a ?category .
@@ -145,19 +148,17 @@ FILTER(?category IN (
 
 ))
 
+?uri geom:geometry [
+      ogc:asWKT ?geo
+    ] .
 
-?uri <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
-?uri <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?lng .
 
-FILTER(?lat < ${neLat})
-FILTER(?lat > ${swLat})
-FILTER(?lng < ${neLng})
-FILTER(?lng > ${swLng})
+ Filter(bif:st_intersects (?geo, bif:st_geomFromText("POLYGON((${swLng} ${neLat}, ${neLng} ${neLat}, ${neLng} ${swLat}, ${swLng} ${swLat}, ${swLng} ${neLat}))"))) .
 
 ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?name .
 FILTER(LANG(?name) = "")
 }
-GROUP BY ?uri ?lat ?lng ?name
+GROUP BY ?uri ?geo ?name
 ORDER BY ?uri
       `);
 
@@ -179,11 +180,11 @@ ORDER BY ?uri
             return category.uris.some(uri => {return categoriesUris.includes(uri)});
           });
           const preferred = dataSubject.categories.models.some(category => {return categories.includes(category)});
+          const coordinates = getCoordinatesFromGeometry(result.geo.value);
           return schema.locations.create({
             id: result.uri.value,
             name: result.name.value,
-            description: result.name.value,
-            coordinates: {latitude: result.lat.value, longitude: result.lng.value},
+            coordinates,
             categories,
             preferred
           });
@@ -195,4 +196,33 @@ ORDER BY ?uri
       });
     });
   });
+}
+
+function getCoordinatesFromGeometry(geo) {
+  const type = geo.split("(")[0];
+  const value = geo.substring(
+    geo.lastIndexOf("(") + 1,
+    geo.lastIndexOf(")")
+  );
+
+  switch(type) {
+    case "POINT":
+      return {
+        latitude: parseFloat(value.split(" ")[1]),
+        longitude: parseFloat(value.split(" ")[0])
+      };
+    case "LINESTRING":
+      const split = value.split(",");
+      const latitudes = [];
+      const longitudes = [];
+      split.forEach(split => {
+        latitudes.push(parseFloat(split.split(" ")[1]));
+        longitudes.push(parseFloat(split.split(" ")[0]));
+      });
+      const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
+      return {
+        latitude: arrAvg(latitudes),
+        longitude: arrAvg(longitudes)
+      };
+  }
 }
