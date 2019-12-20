@@ -51,3 +51,14 @@
   right: 0;
   z-index: 401;
 }
+
+.recommendation-banner {
+  position: absolute;
+  top: 0;
+  bottom: unset !important;
+  width: 100%;
+
+  .md-toast-content {
+    background-color: grey;
+  }
+}

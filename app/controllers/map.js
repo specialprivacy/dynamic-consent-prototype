@@ -1,3 +1,4 @@
+import { A } from '@ember/array';
 import DS from 'ember-data';
 import { inject as service } from '@ember/service';
 import { alias, not } from '@ember/object/computed';
@@ -7,6 +8,10 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   paperToaster: service(),
+  currentDataSubject: service(),
+  dataSubject: alias("currentDataSubject.currentDataSubject"),
+
+  suggestions: A(),
 
   zoom: 14,
   minimalZoomForFetch: 14,
@@ -58,6 +63,19 @@ export default Controller.extend({
         promise: new Promise(function(resolve) {
           return resolve(
             {
+              title: "Mariabeeld Abdij Keizersberg",
+              coordinates: {
+                latitude: 50.8875,
+                longitude: 4.69647
+              }
+            }
+          )
+        })
+      }),
+      DS.PromiseObject.create({
+        promise: new Promise(function(resolve) {
+          return resolve(
+            {
               title: "6, Rue Boucher - Paris",
               coordinates: {
                 latitude: 48.8595096,
@@ -100,6 +118,25 @@ export default Controller.extend({
   }),
 
   actions: {
+    onAcceptSuggestion(suggestion) {
+      this.suggestions.removeObject(suggestion);
+      const { location, category } = suggestion;
+      location.suggestedCategories.removeObject(category);
+      location.inferredCategories.pushObject(category);
+      this.dataSubject.categories.pushObject(category);
+      this.dataSubject.save();
+      location.save();
+    },
+    onRejectSuggestion(suggestion) {
+      const { location, category } = suggestion;
+      location.suggestedCategories.removeObject(category);
+      this.suggestions.removeObject(suggestion);
+    },
+    onToastClosed(suggestion) {
+      const { location, category } = suggestion;
+      location.suggestedCategories.removeObject(category);
+      this.suggestions.removeObject(suggestion);
+    },
     onZoomEnd() {
       if(this.map && this.map.getZoom() < this.minimalZoomForFetch) {
         this.set("isMapZoomedEnough", false);

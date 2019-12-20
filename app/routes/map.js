@@ -5,6 +5,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   currentDataSubject: service(),
+  paperToaster: service(),
 
   beforeModel() {
     if(!this.currentDataSubject.currentDataSubject) {
@@ -32,7 +33,16 @@ export default Route.extend({
     addDataSubjectLocation(location) {
       return this.store.findRecord("notification-mode", this.currentDataSubject.currentDataSubject.belongsTo("notificationMode").id()).then(notificationMode => {
         if(notificationMode.id !== "disabled") {
-          return this.store.createRecord("data-subject-location", { timestamp: new Date(), coordinates: location.coordinates, dataSubject: this.currentDataSubject.currentDataSubject }).save();
+          return this.store.createRecord("data-subject-location", {
+            timestamp: new Date(),
+            coordinates: location.coordinates,
+            dataSubject: this.currentDataSubject.currentDataSubject })
+            .save()
+            .then(location => {
+              location.suggestedCategories.forEach(category => {
+                this.controller.suggestions.pushObject({location, category, notificationMode});
+              });
+            });
         }
       })
     },

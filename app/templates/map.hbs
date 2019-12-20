@@ -63,11 +63,11 @@
               {{/paper-button}}
             {{/if}}
 
-          {{#if (not isMapZoomedEnough)}}
-            {{#paper-button iconButton=true warn=true title="Please zoom in closer so we can fetch recommendations." onClick=(action "onZoomToMinimalLevel")}}
-              {{paper-icon "gps_off"}}
-            {{/paper-button}}
-          {{/if}}
+            {{#if (not isMapZoomedEnough)}}
+              {{#paper-button iconButton=true warn=true title="Please zoom in closer so we can fetch recommendations." onClick=(action "onZoomToMinimalLevel")}}
+                {{paper-icon "gps_off"}}
+              {{/paper-button}}
+            {{/if}}
           </div>
           <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
 
@@ -105,9 +105,9 @@
                 >
                   <h3>{{location.name}}</h3>
                   <div class="layout-row">
-                      {{#each location.categories as |category index|}}
-                        <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
-                      {{/each}}
+                    {{#each location.categories as |category index|}}
+                      <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
+                    {{/each}}
                   </div>
                 </marker.popup>
               </cluster.marker>
@@ -159,5 +159,28 @@
     {{/paper-dialog-actions}}
   {{/paper-dialog}}
 {{/if}}
+
+{{#each suggestions as |suggestion|}}
+
+  {{#if (eq suggestion.notificationMode.id "manual")}}
+    {{#paper-toast duration=false swipeToClose=true position="top right" class="banner-recommendation" onClose=(action "onToastClosed" suggestion) as |toast|}}
+      {{#toast.text}}
+        We think you might like this category: {{suggestion.category.name}}
+      {{/toast.text}}
+      {{#paper-button primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
+      {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}No{{/paper-button}}
+      {{#paper-button primary=true}}More{{/paper-button}}
+    {{/paper-toast}}
+
+  {{else if (eq suggestion.notificationMode.id "automatic")}}
+    {{#paper-toast duration=10000 swipeToClose=true position="top right" class="banner-recommendation" onClose=(action "onAcceptSuggestion" suggestion) as |toast|}}
+      {{#toast.text}}
+        This category will be added to your profile: {{suggestion.category.name}}
+      {{/toast.text}}
+      {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
+      {{#paper-button primary=true}}More{{/paper-button}}
+    {{/paper-toast}}
+  {{/if}}
+{{/each}}
 
 {{paper-toaster}}

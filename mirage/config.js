@@ -6,6 +6,84 @@ export default function() {
   this.resource("location");
   this.resource("data-subject");
   this.resource("data-subject-location");
+  this.post("/data-subject-locations", function(schema, request) {
+    let attrs = this.normalizedRequestAttrs();
+    const dataSubject = schema.dataSubjects.find(attrs.dataSubjectId);
+
+    const params = new URLSearchParams();
+    params.append("query", `
+PREFIX lgdo: <http://linkedgeodata.org/ontology/>
+PREFIX geom: <http://geovocab.org/geometry#>
+PREFIX ogc:<http://www.opengis.net/ont/geosparql#>
+SELECT (GROUP_CONCAT(?category;separator=",") as ?categories)
+FROM <http://linkedgeodata.org> {
+  ?uri a ?category.
+
+FILTER(?category IN (
+
+<http://linkedgeodata.org/ontology/ArtGallery>,
+<http://linkedgeodata.org/ontology/Brewery>,
+<http://linkedgeodata.org/ontology/Casino>,
+<http://linkedgeodata.org/ontology/Cemetery>,
+<http://linkedgeodata.org/ontology/Chapel>,
+<http://linkedgeodata.org/ontology/Fountain>,
+<http://linkedgeodata.org/ontology/Garden>,
+<http://linkedgeodata.org/ontology/GolfCourse>,
+<http://linkedgeodata.org/ontology/HistoricThing>,
+<http://linkedgeodata.org/ontology/HotSpring>,
+<http://linkedgeodata.org/ontology/Museum>,
+<http://linkedgeodata.org/ontology/MusicVenue>,
+<http://linkedgeodata.org/ontology/NaturalThing>,
+<http://linkedgeodata.org/ontology/NatureReserve>,
+<http://linkedgeodata.org/ontology/Nightclub>,
+<http://linkedgeodata.org/ontology/Statue>,
+<http://linkedgeodata.org/ontology/Theatre>,
+<http://linkedgeodata.org/ontology/ThemePark>,
+<http://linkedgeodata.org/ontology/Viewpoint>,
+<http://linkedgeodata.org/ontology/WaterPark>,
+<http://linkedgeodata.org/ontology/Zoo>,
+<http://linkedgeodata.org/ontology/ArtsCentre>,
+<http://linkedgeodata.org/ontology/Artwork>,
+<http://linkedgeodata.org/ontology/PlaceOfWorship>,
+<http://linkedgeodata.org/ontology/Monastery>,
+<http://linkedgeodata.org/ontology/GraveYard>,
+<http://linkedgeodata.org/ontology/Church>,
+<http://linkedgeodata.org/ontology/Park>
+
+))
+
+  ?uri geom:geometry [ogc:asWKT ?g] .
+
+  FILTER(bif:st_intersects (?g, bif:st_point (${attrs.coordinates.longitude}, ${attrs.coordinates.latitude}), 0.00001)) .
+}
+      `);
+
+    return fetch("http://linkedgeodata.org/sparql", {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Accept": "application/json"
+      },
+      body: params
+    }).then(result => {
+      return result.json();
+    }).then(result => {
+      result.results.bindings.forEach(result => {
+        const categoriesUris = result.categories.value.split(",");
+        let categories = schema.categories.where((category) => {
+          return category.uris.some(uri => {return categoriesUris.includes(uri)});
+        });
+        categories = categories.models.filter(category => {return !dataSubject.categories.models.any(cat => cat.id === category.id)});
+        categories.forEach(category => {
+          if(!("suggestedCategoryIds" in attrs)) {
+            attrs.suggestedCategoryIds = [];
+          }
+          attrs.suggestedCategoryIds.push(category.id);
+        });
+      });
+
+      return schema.dataSubjectLocations.create(attrs);
+    });
+  });
   this.resource("notification-mode");
   this.resource("session");
   this.post("/sessions", function (schema, request) {
