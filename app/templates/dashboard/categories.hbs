@@ -6,9 +6,12 @@
     {{/if}}
     {{#paper-item class="md-3-line"}}
       <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}} class="md-avatar">
-      <div class="md-list-item-text">
+      <div class="md-list-item-text flex">
         <h3>{{category.name}}</h3>
       </div>
+      {{#paper-button iconButton=true onClick=(action "delete" category)}}
+        {{paper-icon "delete_forever"}}
+      {{/paper-button}}
     {{/paper-item}}
   {{else}}
     We did not infer any interest for any categories from your locations.

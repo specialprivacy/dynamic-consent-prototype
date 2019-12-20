@@ -12,6 +12,9 @@
     {{#card.content class="flex layout-column card-content"}}
 
       {{#paper-tabs selected=(readonly currentRouteName) borderBottom=true as |tabs|}}
+        {{#tabs.tab value="dashboard.overview" href=(href-to "dashboard.overview")}}
+          Overview
+        {{/tabs.tab}}
         {{#tabs.tab value="dashboard.locations" href=(href-to "dashboard.locations")}}
           Locations
         {{/tabs.tab}}

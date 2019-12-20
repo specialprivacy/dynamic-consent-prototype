@@ -20,7 +20,7 @@ export default function(server) {
   const theatres = server.create("category", { id: "theatres", name: "Theatres", icons: { filled: "/assets/images/tragedy-filled.png", default: "/assets/images/tragedy-empty.png" }, uris: ["http://linkedgeodata.org/ontology/Theatre"] });
   const entertainment = server.create("category", { id: "entertainment", name: "Entertainment", icons: { filled: "/assets/images/rollercoaster-filled.png", default: "/assets/images/rollercoaster-empty.png" }, uris: ["http://linkedgeodata.org/ontology/Zoo", "http://linkedgeodata.org/ontology/WaterPark", "http://linkedgeodata.org/ontology/ThemePark"] });
 
-  const bernard = server.create("data-subject", {firstName: "Bernard", lastName: "Roger", hasCompletedSetup: true, username: "bernard", password: "roger", notificationMode: automatic, categories: [historic, nature]});
+  const bernard = server.create("data-subject", {firstName: "Bernard", lastName: "Roger", hasCompletedSetup: true, username: "bernard", password: "roger", notificationMode: automatic, categories: [historic, music, breweries]});
   server.create("data-subject", {firstName: "Antoine", lastName: "Roger", hasCompletedSetup: false, username: "antoine", password: "roger", notificationMode: disabled, categories: []});
 
   server.create("data-subject-location", { timestamp: new Date(2019, 1, 30, 10), coordinates: { latitude: 48.2082, longitude: 16.3738 }, dataSubject: bernard, inferredCategories: [historic] });

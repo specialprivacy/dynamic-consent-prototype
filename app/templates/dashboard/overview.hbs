@@ -1,0 +1,30 @@
+<LeafletMap
+  @bounds={{bounds}}
+  @class={{"flex layout-fill"}} as |layers|>
+  <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+
+
+  <layers.marker-cluster as |cluster|>
+    {{#each locations as |location|}}
+      <cluster.marker
+        @icon={{icon
+              iconSize=(array 40 40)
+              iconAnchor=(array 20 40)
+              popupAnchor=(array 0 -40)
+              iconUrl=(if location.inferredCategories.length "/assets/images/favourite.png" "/assets/images/red.svg")}}
+        @location={{array location.latitude location.longitude}} as |marker|>
+        <marker.popup>
+          <h3>{{moment-calendar location.timestamp null (hash sameElse="DD/MM/YYYY")}}</h3>
+          {{#if location.inferredCategories.length}}
+            <div class="layout-row">
+              {{#each location.inferredCategories as |category|}}
+                <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
+              {{/each}}
+            </div>
+          {{/if}}
+        </marker.popup>
+      </cluster.marker>
+    {{/each}}
+  </layers.marker-cluster>
+
+</LeafletMap>

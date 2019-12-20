@@ -17,6 +17,7 @@ Router.map(function() {
   this.route('dashboard', function() {
     this.route('categories');
     this.route('locations');
+    this.route('overview');
   });
 });
 
