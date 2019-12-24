@@ -1,9 +1,9 @@
-import { A } from '@ember/array';
 import DS from 'ember-data';
+import { A } from '@ember/array';
 import { inject as service } from '@ember/service';
 import { alias, not } from '@ember/object/computed';
 import { computed } from '@ember/object';
-import { debounce, throttle, later } from '@ember/runloop';
+import { debounce, throttle } from '@ember/runloop';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
@@ -119,25 +119,6 @@ export default Controller.extend({
   }),
 
   actions: {
-    onAcceptSuggestion(suggestion) {
-      this.suggestions.removeObject(suggestion);
-      const { location, category } = suggestion;
-      location.suggestedCategories.removeObject(category);
-      location.inferredCategories.pushObject(category);
-      this.dataSubject.categories.pushObject(category);
-      this.dataSubject.save();
-      location.save();
-    },
-    onRejectSuggestion(suggestion) {
-      const { location, category } = suggestion;
-      location.suggestedCategories.removeObject(category);
-      this.suggestions.removeObject(suggestion);
-    },
-    onToastClosed(suggestion) {
-      const { location, category } = suggestion;
-      location.suggestedCategories.removeObject(category);
-      this.suggestions.removeObject(suggestion);
-    },
     onZoomEnd() {
       if(this.map && this.map.getZoom() < this.minimalZoomForFetch) {
         this.set("isMapZoomedEnough", false);

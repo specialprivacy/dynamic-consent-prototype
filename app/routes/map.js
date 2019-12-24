@@ -40,7 +40,7 @@ export default Route.extend({
             .save()
             .then(location => {
               location.suggestedCategories.forEach(category => {
-                this.controller.suggestions.pushObject({location, category, notificationMode});
+                this.modelFor("application").pushObject({location, category, notificationMode});
               });
             });
         }

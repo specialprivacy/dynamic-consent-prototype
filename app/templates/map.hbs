@@ -169,32 +169,3 @@
     {{/paper-dialog-actions}}
   {{/paper-dialog}}
 {{/if}}
-
-{{#each suggestions as |suggestion|}}
-
-  {{#if (eq suggestion.notificationMode.id "manual")}}
-    {{#paper-toast duration=false swipeToClose=true position="top right" class="banner-recommendation" onClose=(action "onToastClosed" suggestion) as |toast|}}
-      {{#toast.text}}
-        We think you might like this category: {{suggestion.category.name}}
-      {{/toast.text}}
-      <div class="layout-column">
-        {{#paper-button primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
-        {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}No{{/paper-button}}
-        {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
-      </div>
-    {{/paper-toast}}
-
-  {{else if (eq suggestion.notificationMode.id "automatic")}}
-    {{#paper-toast duration=10000 swipeToClose=true position="top right" class="banner-recommendation" onClose=(action "onAcceptSuggestion" suggestion) as |toast|}}
-      {{#toast.text}}
-        This category will be added to your profile: {{suggestion.category.name}}
-      {{/toast.text}}
-      <div class="layout-column">
-        {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
-        {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
-      </div>
-    {{/paper-toast}}
-  {{/if}}
-{{/each}}
-
-{{paper-toaster}}
