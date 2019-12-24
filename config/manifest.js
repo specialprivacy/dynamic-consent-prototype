@@ -5,10 +5,10 @@ module.exports = function(/* environment, appConfig */) {
   // supported properties
 
   return {
-    name: "tourism-application",
-    short_name: "tourism-application",
+    name: "dynamic-consent",
+    short_name: "dynamic-consent",
     description: "",
-    start_url: "/",
+    start_url: "/dynamic-consent",
     display: "standalone",
     background_color: "#fff",
     theme_color: "#fff",
@@ -18,4 +18,4 @@ module.exports = function(/* environment, appConfig */) {
       tileColor: '#fff'
     }
   };
-}
+};

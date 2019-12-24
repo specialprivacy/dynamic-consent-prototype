@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'tourism-application',
     environment,
-    rootURL: '/',
+    rootURL: '/dynamic-consent/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
