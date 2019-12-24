@@ -11,7 +11,7 @@
               iconSize=(array 40 40)
               iconAnchor=(array 20 40)
               popupAnchor=(array 0 -40)
-              iconUrl=(if location.inferredCategories.length "/assets/images/favourite.png" "/assets/images/red.svg")}}
+              iconUrl=(if location.inferredCategories.length "/dynamic-consent/assets/images/favourite.png" "/dynamic-consent/assets/images/red.svg")}}
         @location={{array location.latitude location.longitude}} as |marker|>
         <marker.popup>
           <h3>{{moment-calendar location.timestamp null (hash sameElse="DD/MM/YYYY")}}</h3>
