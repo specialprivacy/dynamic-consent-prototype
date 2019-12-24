@@ -1,9 +1,9 @@
-import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
+import { sort } from '@ember/object/computed';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  locations: alias("model"),
+  locationsSortingKeys: ["timestamp:desc"],
+  locations: sort("model", "locationsSortingKeys"),
 
   actions: {
     delete(model) {
