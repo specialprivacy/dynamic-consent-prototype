@@ -24,9 +24,6 @@ export default Controller.extend({
         })
       });
       return false;
-    },
-    setShowLogo(bool) {
-      this.set("showLogo", bool);
     }
   }
 });
