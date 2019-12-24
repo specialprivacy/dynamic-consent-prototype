@@ -6,6 +6,7 @@ export default Route.extend({
 
   beforeModel() {
     this.currentDataSubject.set("currentDataSubject",  null);
+    this.modelFor("application").clear();
     setTimeout(() => {
       this.replaceWith("login");
     }, 5000);
