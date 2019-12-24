@@ -1,7 +1,7 @@
 export default function(server) {
 
-  const manual = server.create("notification-mode", { id: "manual", label: "Add manually", description: "The category will only be added to your profile if you press \"Yes\" when the notification appears. If you ignore the notification, the category will not be added."});
-  const automatic = server.create("notification-mode", { id: "automatic", label: "Add automatically", description: "The category will be added to your profile unless you press \"No\" when the notification appears. If you ignore the notification, the category will be added."});
+  const manual = server.create("notification-mode", { id: "manual", label: "Manual", description: "The category will only be added to your profile if you press \"Yes\" when the notification appears. If you ignore the notification or press \"No\", the category will not be added."});
+  const automatic = server.create("notification-mode", { id: "automatic", label: "Automatic", description: "The category will be added to your profile by default unless you press \"Undo\". If you ignore the notification, the category will be added."});
   const disabled = server.create("notification-mode", { id: "disabled", label: "No data collection", description: "No data will be collected while you use the application."});
 
   const art = server.create("category", { id: "art", name: "Art", icons: { filled: "/assets/images/palette-filled.png", default: "/assets/images/palette-empty.png" }, uris: ["http://linkedgeodata.org/ontology/Artwork", "http://linkedgeodata.org/ontology/ArtsCentre", "http://linkedgeodata.org/ontology/ArtGallery"] });

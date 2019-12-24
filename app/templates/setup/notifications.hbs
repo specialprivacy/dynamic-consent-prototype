@@ -17,10 +17,7 @@
     {{#card.content class="flex layout-column card-content"}}
       <div class="layout-column margin-auto">
         <span class="md-padding">
-          Thanks to the location data we collect, we can try to understand your interests and provide you with new categories based on the locations you have visited.
-        </span>
-        <span class="md-padding">
-          Please select whether you want us to notify you when we discover a category you might be interested in and if you do, what their default behavior should be.
+          Please choose the default behavior the Consent Manager should use when it needs to contact you.
         </span>
 
         {{#paper-radio-group
@@ -34,6 +31,8 @@
             {{/group.radio}}
           {{/each}}
         {{/paper-radio-group}}
+
+        {{#paper-button class=(if (eq notificationMode.id "disabled") "hidden" "") raised=true primary=true onClick=(action (mut showDemo) true)}}Show example notification{{/paper-button}}
       </div>
 
     {{/card.content}}
@@ -41,8 +40,10 @@
 
 {{/presenter-container}}
 
-{{#if (eq notificationMode.id "manual")}}
-  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" as |toast|}}
+
+
+{{#if (and showDemo (eq notificationMode.id "manual"))}}
+  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" onClose=(action (mut showDemo) false) as |toast|}}
     <div class="layout-column">
       {{#toast.text class="md-margin layout-row"}}
         We think you might like this category: Museums
@@ -55,8 +56,8 @@
     </div>
   {{/paper-toast}}
 
-{{else if (eq notificationMode.id "automatic")}}
-  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" as |toast|}}
+{{else if (and showDemo (eq notificationMode.id "automatic"))}}
+  {{#paper-toast duration=10000 swipeToClose=true position="top right" class="banner" onClose=(action (mut showDemo) false) as |toast|}}
     <div class="layout-column">
       {{#toast.text class="md-margin layout-row"}}
         This category will be added to your profile: Museums

@@ -54,9 +54,12 @@
 
 .banner {
   width: 100%;
+  -webkit-box-shadow: 0px -3px 18px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px -3px 18px -8px rgba(0,0,0,0.75);
+  box-shadow: 0px -3px 18px -8px rgba(0,0,0,0.75);
   .md-toast-content {
+    padding: 5px 0;
     background-color: white;
     color: black;
-    border-top: 2px solid black;
   }
 }

@@ -21,15 +21,15 @@
       </div>
 
       <div class="flex layout-column margin-auto">
-        <div class="md-padding"><b>Your configuration is complete.</b></div>
+        <div class="md-padding"><b>Your configuration is now complete.</b></div>
 
-        <div class="md-padding">Click the button called <b>Privacy policy</b> below to learn more about how Apricot processes your personal data.</div>
+        <div class="md-padding">
+          You may click the {{#paper-button iconButton=true onClick=(action "finishSetup")}}
+          {{paper-icon "done"}}
+        {{/paper-button}} button to proceed to the map view, where recommendations will start appearing.
+        </div>
 
-        <div class="md-padding">Click <b>Dashboard</b> to customize your interests and your privacy preferences.</div>
-
-        <div class="md-padding">Click <b>Quit</b> to finish this setup.</div>
-
-        <div class="md-padding">Have fun with the events recommendations!</div>
+        <div class="md-padding">Please enjoy the recommendations!</div>
       </div>
     {{/card.content}}
   {{/container.content}}
