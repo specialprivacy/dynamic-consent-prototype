@@ -58,17 +58,29 @@ export default Controller.extend({
     this.set("swLng", bounds._southWest.lng);
     return this.send("fetchLocations", this.neLat, this.neLng, this.swLat, this.swLng);
   },
-
   demoLocations: computed(function() {
     return [
       DS.PromiseObject.create({
         promise: new Promise(function(resolve) {
           return resolve(
             {
-              title: "Mariabeeld Abdij Keizersberg",
+              title: "Paulus Potterstrat, Amsterdam",
               coordinates: {
-                latitude: 50.8875,
-                longitude: 4.69647
+                latitude: 52.3581812,
+                longitude: 4.8789124
+              }
+            }
+          )
+        })
+      }),
+      DS.PromiseObject.create({
+        promise: new Promise(function(resolve) {
+          return resolve(
+            {
+              title: "Van Gogh Museum - Amsterdam",
+              coordinates: {
+                latitude: 52.3581089,
+                longitude: 4.8811801
               }
             }
           )
@@ -91,10 +103,10 @@ export default Controller.extend({
         promise: new Promise(function(resolve) {
           return resolve(
             {
-              title: "Van Gogh Museum - Amsterdam",
+              title: "Louvre Museum, Paris",
               coordinates: {
-                latitude: 52.3581089,
-                longitude: 4.8811801
+                latitude: 48.8606163,
+                longitude: 2.337537
               }
             }
           )
@@ -154,6 +166,7 @@ export default Controller.extend({
           this.set("longitude", location.coordinates.longitude);
           this.set("mapLatitude", location.coordinates.latitude);
           this.set("mapLongitude", location.coordinates.longitude);
+          this.set("zoom", 18);
           this.set("hasLocationBeenSelected", true);
           this.set("showDemo", false);
           this.send("addDataSubjectLocation", location);
