@@ -182,7 +182,7 @@
       {{/toast.text}}
       {{#paper-button primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
       {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}No{{/paper-button}}
-      {{#paper-button primary=true}}More{{/paper-button}}
+      {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
     {{/paper-toast}}
 
   {{else if (eq suggestion.notificationMode.id "automatic")}}
@@ -191,7 +191,7 @@
         This category will be added to your profile: {{suggestion.category.name}}
       {{/toast.text}}
       {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
-      {{#paper-button primary=true}}More{{/paper-button}}
+      {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
     {{/paper-toast}}
   {{/if}}
 {{/each}}
