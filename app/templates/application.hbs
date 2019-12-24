@@ -11,7 +11,7 @@
           {{#toast.text class="md-margin layout-row"}}
             <span class="tag-label">We think you might like this category: </span><span class="tag">{{suggestion.category.name}}</span>
           {{/toast.text}}
-          <div class="layout-row md-padding">
+          <div class="layout-row md-margin">
             {{#paper-button raised=true primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
             {{#paper-button raised=true primary=true onClick=(action "onRejectSuggestion" suggestion)}}No{{/paper-button}}
             {{#paper-button raised=true primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
@@ -25,7 +25,7 @@
           {{#toast.text class="md-margin layout-row"}}
             <span class="tag-label">This category will be added to your profile: </span><span class="tag">{{suggestion.category.name}}</span>
           {{/toast.text}}
-          <div class="layout-row md-padding md-margin">
+          <div class="layout-row md-margin">
             {{#paper-button raised=true primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
             {{#paper-button raised=true primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
           </div>
