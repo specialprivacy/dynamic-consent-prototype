@@ -42,8 +42,8 @@
       {{/paper-content}}
     {{/paper-sidenav}}
 
-    {{#container.content class="flex layout-column" as |card|}}
-      {{#card.content class="flex card-content"}}
+    {{#container.content class="flex layout-column no-margin" as |card|}}
+      {{#card.content class="flex card-content no-padding"}}
         <LeafletMap
           @lat={{mapLatitude}}
           @lng={{mapLongitude}}
