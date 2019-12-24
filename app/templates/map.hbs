@@ -56,20 +56,20 @@
         >
 
           <div class="map-actions layout-column">
-            {{#if (and latitude longitude)}}
-              {{#paper-button iconButton=true primary=true title="Move to current location." onClick=(action "onMoveToCurrentLocation")}}
+            {{#if (not showLocationPicker)}}
+              {{#paper-button iconButton=true primary=true title="Move to current location" onClick=(action (mut hasLocationBeenSelected) false)}}
                 {{paper-icon "my_location"}}
               {{/paper-button}}
             {{/if}}
 
             {{#if (not isMapZoomedEnough)}}
-              {{#paper-button iconButton=true warn=true title="Please zoom in closer so we can fetch recommendations." onClick=(action "onZoomToMinimalLevel")}}
+              {{#paper-button iconButton=true warn=true title="Please zoom in closer so we can fetch recommendations" onClick=(action "onZoomToMinimalLevel")}}
                 {{paper-icon "explore_off"}}
               {{/paper-button}}
             {{/if}}
 
             {{#if isFetchingLocations}}
-              {{#paper-button iconButton=true title="Fetching recommendations..."}}
+              {{#paper-button iconButton=true title="Fetching recommendations"}}
                 {{paper-progress-circular class="md-hue-2" diameter=25}}
               {{/paper-button}}
             {{/if}}
@@ -129,7 +129,7 @@
 
 
 {{#if showLocationPicker}}
-  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" onClose=(action (mut showLocationPicker) false) as |toast|}}
+  {{#paper-toast duration=false position="top right" class="banner" as |toast|}}
     <div class="layout-column">
       {{#toast.text class="md-margin"}}
         Should we use your current location or do you want to browse the map freely?

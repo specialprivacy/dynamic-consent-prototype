@@ -178,6 +178,8 @@ export default Controller.extend({
         });
       }
       else {
+        this.set("latitude", null);
+        this.set("longitude", null);
         this.set("hasLocationBeenSelected", true);
         this.set("showDemo", false);
       }
