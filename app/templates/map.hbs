@@ -144,7 +144,7 @@
 {{/if}}
 
 {{#if (and showLocationPicker showDemo)}}
-  {{#paper-dialog class="flex-77" onClose=(action (mut showDemo) false) clickOutsideToClose=true}}
+  {{#paper-dialog focusOnOpen=false class="flex-77" onClose=(action (mut showDemo) false) clickOutsideToClose=true}}
     {{#paper-dialog-content}}
       <p>
         Please select your current location.
