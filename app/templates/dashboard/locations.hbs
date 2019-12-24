@@ -4,14 +4,16 @@
     {{#if (not-eq index 0)}}
       {{paper-divider}}
     {{/if}}
-    {{#paper-item class="md-3-line"}}
+    {{#paper-item class="md-3-line" as |controls|}}
       <img height="20" width="20" title={{if location.inferredCategories.length "This location led us to infer some interets in a category." "This location was recorded but didn't lead to any suggestion."}} src={{if location.inferredCategories.length "/assets/images/favourite.png" "/assets/images/red.svg"}} alt={{if location.inferredCategories.length "Preferred" "Normal"}} class="md-avatar">
       <div class="md-list-item-text flex">
         <h3>{{moment-calendar location.timestamp null (hash sameElse="DD/MM/YYYY")}}</h3>
       </div>
-      {{#paper-button iconButton=true onClick=(action "delete" location)}}
-        {{paper-icon "delete_forever"}}
-      {{/paper-button}}
+      <div class="md-secondary-container">
+        {{#controls.button iconButton=true onClick=(action "delete" category)}}
+          {{paper-icon "delete_forever"}}
+        {{/controls.button}}
+      </div>
     {{/paper-item}}
   {{else}}
     We did not infer any interest for any locations from your locations.
