@@ -41,4 +41,43 @@
 
 {{/presenter-container}}
 
+{{#if (eq notificationMode.id "manual")}}
+  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" as |toast|}}
+    <div class="layout-column">
+      {{#toast.text class="md-margin layout-row"}}
+        We think you might like this category: Museums
+      {{/toast.text}}
+      <div class="layout-row md-margin">
+        {{#paper-button raised=true primary=true onClick=(action "showDialog" "This category would be added to your profile.")}}Yes{{/paper-button}}
+        {{#paper-button raised=true primary=true onClick=(action "showDialog" "This category would not be added to your profile.")}}No{{/paper-button}}
+        {{#paper-button raised=true primary=true onClick=(action "showDialog" "You would be taken to the dashboard, where more information can be found.")}}More{{/paper-button}}
+      </div>
+    </div>
+  {{/paper-toast}}
+
+{{else if (eq notificationMode.id "automatic")}}
+  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" as |toast|}}
+    <div class="layout-column">
+      {{#toast.text class="md-margin layout-row"}}
+        This category will be added to your profile: Museums
+      {{/toast.text}}
+      <div class="layout-row md-margin">
+        {{#paper-button raised=true primary=true onClick=(action "showDialog" "This category would not be added to your profile.")}}Undo{{/paper-button}}
+        {{#paper-button raised=true primary=true title="See more info on the dashboard" onClick=(action "showDialog" "You would be taken to the dashboard, where more information can be found.")}}More{{/paper-button}}
+      </div>
+    </div>
+  {{/paper-toast}}
+{{/if}}
+
+{{#if (and showDialog (not-eq notificationMode.id "disabled"))}}
+  {{#paper-dialog class="flex-77" onClose=(action (mut showDialog) false) clickOutsideToClose=true}}
+    {{#paper-dialog-content}}
+      <p>
+        {{dialogText}}
+      </p>
+    {{/paper-dialog-content}}
+  {{/paper-dialog}}
+{{/if}}
+
+
 {{paper-toaster}}

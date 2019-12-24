@@ -60,27 +60,3 @@
     border-top: 2px solid black;
   }
 }
-
-.tag {
-  border-radius: 16px;
-  display: block;
-  height: 32px;
-  line-height: 32px;
-  margin: 8px 8px 0 0;
-  padding: 0 12px;
-  background: #e0e0e0;
-  background: RGB(var(--background-300));
-  color: #424242;
-  color: RGB(var(--background-800));
-}
-
-.tag-label {
-  flex: unset !important;
-  border-radius: 16px;
-  display: block;
-  height: 32px;
-  line-height: 32px;
-  margin: 8px 8px 0 0;
-  padding: 0 12px;
-  background-color: white;
-}

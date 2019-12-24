@@ -8,6 +8,9 @@ export default Controller.extend({
   notificationModes: alias("model"),
   notificationMode: alias("currentDataSubject.currentDataSubject.notificationMode"),
 
+  dialogText: "",
+  showDialog: false,
+
   actions: {
     goBack() {
       return history.back();
@@ -15,8 +18,9 @@ export default Controller.extend({
     proceed() {
       return this.transitionToRoute("setup.completed");
     },
-    setNotificationMode(notificationMode) {
-      this.currentDataSubject.currentDataSubject.set("notificationMode", notificationMode);
+    showDialog(text) {
+      this.set("dialogText", text);
+      this.set("showDialog", true);
     }
   }
 });

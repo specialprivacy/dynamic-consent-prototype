@@ -9,7 +9,7 @@
       {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" onClose=(action "onToastClosed" suggestion) as |toast|}}
         <div class="layout-column">
           {{#toast.text class="md-margin layout-row"}}
-            <span class="tag-label">We think you might like this category: </span><span class="tag">{{suggestion.category.name}}</span>
+            We think you might like this category: {{suggestion.category.name}}
           {{/toast.text}}
           <div class="layout-row md-margin">
             {{#paper-button raised=true primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
@@ -23,7 +23,7 @@
       {{#paper-toast duration=10000 swipeToClose=true position="top right" class="banner" onClose=(action "onAcceptSuggestion" suggestion) as |toast|}}
         <div class="layout-column">
           {{#toast.text class="md-margin layout-row"}}
-            <span class="tag-label">This category will be added to your profile: </span><span class="tag">{{suggestion.category.name}}</span>
+            This category will be added to your profile: {{suggestion.category.name}}
           {{/toast.text}}
           <div class="layout-row md-margin">
             {{#paper-button raised=true primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
