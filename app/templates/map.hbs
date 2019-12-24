@@ -142,19 +142,16 @@
 
 
 {{#if showLocationPicker}}
-  {{#paper-dialog class="flex-77"}}
-    {{#paper-dialog-content}}
-      <p>
-        Should we use your current position to filter recommendations around you? You can always move the marker afterwards and, if we can't use your location, you can just press anywhere on the map.
-      </p>
-    {{/paper-dialog-content}}
-
-    {{#paper-dialog-actions class="layout-row"}}
-      {{#paper-button onClick=(action "useLocation" currentLocation)}}Yes{{/paper-button}}
-      {{#paper-button onClick=(action (mut showDemo) true)}}Yes (demo){{/paper-button}}
-      {{#paper-button onClick=(action "useLocation" false)}}No{{/paper-button}}
-    {{/paper-dialog-actions}}
-  {{/paper-dialog}}
+  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner-recommendation" onClose=(action (mut showLocationPicker) false) as |toast|}}
+    {{#toast.text}}
+      Should we use your current location or do you want to browse the map freely?
+    {{/toast.text}}
+    <div class="layout-column">
+      {{#paper-button onClick=(action "useLocation" currentLocation)}}Use my location{{/paper-button}}
+      {{#paper-button onClick=(action (mut showDemo) true)}}Use a demo location{{/paper-button}}
+      {{#paper-button onClick=(action "useLocation" false)}}Browse{{/paper-button}}
+    </div>
+  {{/paper-toast}}
 {{/if}}
 
 {{#if (and showLocationPicker showDemo)}}
@@ -180,9 +177,11 @@
       {{#toast.text}}
         We think you might like this category: {{suggestion.category.name}}
       {{/toast.text}}
-      {{#paper-button primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
-      {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}No{{/paper-button}}
-      {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
+      <div class="layout-column">
+        {{#paper-button primary=true onClick=(action "onAcceptSuggestion" suggestion)}}Yes{{/paper-button}}
+        {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}No{{/paper-button}}
+        {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
+      </div>
     {{/paper-toast}}
 
   {{else if (eq suggestion.notificationMode.id "automatic")}}
@@ -190,8 +189,10 @@
       {{#toast.text}}
         This category will be added to your profile: {{suggestion.category.name}}
       {{/toast.text}}
-      {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
-      {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
+      <div class="layout-column">
+        {{#paper-button primary=true onClick=(action "onRejectSuggestion" suggestion)}}Undo{{/paper-button}}
+        {{#paper-button primary=true title="See more info on the dashboard" href=(href-to "dashboard")}}More{{/paper-button}}
+      </div>
     {{/paper-toast}}
   {{/if}}
 {{/each}}
