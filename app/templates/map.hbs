@@ -135,7 +135,7 @@
         Should we use your current location or do you want to browse the map freely?
       {{/toast.text}}
       <div class="layout-row md-margin">
-        {{#paper-button raised=true primary=true onClick=(action "useLocation" currentLocation)}}Use my location{{/paper-button}}
+        {{#paper-button raised=true primary=true onClick=(action "useLocation" currentLocation) disabled=isFetchingCurrentLocation}}Use my location{{/paper-button}}
         {{#paper-button raised=true primary=true onClick=(action (mut showDemo) true)}}Demo{{/paper-button}}
         {{#paper-button raised=true primary=true onClick=(action "useLocation" false)}}Browse{{/paper-button}}
       </div>
@@ -158,3 +158,5 @@
     {{/paper-dialog-actions}}
   {{/paper-dialog}}
 {{/if}}
+
+{{paper-toaster}}

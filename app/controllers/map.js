@@ -24,6 +24,7 @@ export default Controller.extend({
   hasLocationBeenSelected: false,
   showLocationPicker: not("hasLocationBeenSelected"),
   isFetchingLocations: false,
+  isFetchingCurrentLocation: false,
 
   locations: computed("model.locations", "model.locations.length", "categories.@each.selected", function(){
     return this.model.locations.filter((location) => {
@@ -146,6 +147,7 @@ export default Controller.extend({
     },
 
     useLocation(location) {
+      this.set("isFetchingCurrentLocation", true);
       if (location && location.then) {
         location.then(location => {
           this.set("latitude", location.coordinates.latitude);
@@ -171,6 +173,8 @@ export default Controller.extend({
               errorMessage = "An error occured when fetching device position."
           }
           this.paperToaster.show(errorMessage, { toastClass: "error-toast"});
+        }).finally(() => {
+          this.set("isFetchingCurrentLocation", false);
         });
       }
       else {
