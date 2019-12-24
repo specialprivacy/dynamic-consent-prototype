@@ -100,7 +100,7 @@
                       iconSize=(array 20 20)
                       iconAnchor=(array 10 20)
                       popupAnchor=(array 0 -20)
-                      iconUrl=location.categories.firstObject.icon}}
+                      iconUrl=location.firstSelectedCategory.icon}}
                 @location={{array location.latitude location.longitude}} as |marker|>
                 <marker.popup
                   @autoPan={{true}}
@@ -111,7 +111,7 @@
                   <h3>{{location.name}}</h3>
                   <div class="layout-row">
                     {{#each location.categories as |category index|}}
-                      <img title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
+                      <img class="md-margin" title={{category.name}} height="20" width="20" src={{category.icon}} alt={{category.name}}/>
                     {{/each}}
                   </div>
                 </marker.popup>

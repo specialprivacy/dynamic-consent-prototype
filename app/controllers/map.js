@@ -181,6 +181,7 @@ export default Controller.extend({
         this.set("latitude", null);
         this.set("longitude", null);
         this.set("hasLocationBeenSelected", true);
+        this.set("isFetchingCurrentLocation", false);
         this.set("showDemo", false);
       }
     }
