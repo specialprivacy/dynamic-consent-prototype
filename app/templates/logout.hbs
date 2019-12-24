@@ -1,0 +1,28 @@
+{{#presenter-container class="flex layout-column" as |container|}}
+  {{#container.header}}
+    {{#paper-toolbar-tools}}
+      {{paper-button iconButton=true class="hidden"}}
+      <h2>S8-C recommender engine</h2>
+    {{/paper-toolbar-tools}}
+  {{/container.header}}
+
+  {{#container.content class="flex layout-column min-width-70" as |card|}}
+    {{#card.content class="flex layout-column layout-gt-xs-row card-content"}}
+
+      <div class="md-padding margin-auto flex-gt-xs show-gt-xs {{if showLogo "show-xs" "hide-xs"}}" style="text-align:center;">
+        <img src="/assets/images/special_logo_alpha.png" style="max-height:70VH;max-width: 70VW;"/>
+      </div>
+
+
+      <div class="flex md-padding flex-gt-sm layout-column margin-auto">
+        <span>You have been signed out. We will redirect you to the sign-in page in a few seconds.</span>
+        {{#paper-button primary=true raised=true href=(href-to "login")}}Take me to the sign-in page.{{/paper-button}}
+      </div>
+
+    {{/card.content}}
+
+  {{/container.content}}
+
+{{/presenter-container}}
+
+{{paper-toaster}}

@@ -4,19 +4,7 @@
       {{paper-button iconButton=true class="hidden"}}
       <h2 class="flex">S8-C recommender engine</h2>
       <span>1/4</span>
-      {{#paper-menu as |menu|}}
-        {{#menu.trigger}}
-          {{#paper-button iconButton=true}}
-            {{paper-icon "account_circle"}}
-          {{/paper-button}}
-        {{/menu.trigger}}
-        {{#menu.content width=4 as |content|}}
-          {{#content.menu-item href=(href-to "dashboard")}}
-            {{paper-icon "dashboard"}}
-            <span>Dashboard</span>
-          {{/content.menu-item}}
-        {{/menu.content}}
-      {{/paper-menu}}
+      {{application-menu}}
       {{#paper-button iconButton=true onClick=(action "proceed")}}
         {{paper-icon "arrow_forward"}}
       {{/paper-button}}

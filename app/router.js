@@ -19,6 +19,7 @@ Router.map(function() {
     this.route('locations');
     this.route('overview');
   });
+  this.route('logout');
 });
 
 export default Router;

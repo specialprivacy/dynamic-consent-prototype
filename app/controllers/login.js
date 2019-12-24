@@ -16,7 +16,7 @@ export default Controller.extend({
       this.model.save().then(session => {
         return session.get("dataSubject");
       }).then(dataSubject => {
-        this.currentDataSubject.currentDataSubject = dataSubject;
+        this.currentDataSubject.set("currentDataSubject", dataSubject);
         this.replaceRoute("map");
       }).catch((ex) => {
         ex.errors.forEach(error => {

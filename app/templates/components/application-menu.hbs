@@ -1,0 +1,18 @@
+{{#paper-menu as |menu|}}
+  {{#menu.trigger}}
+    {{#paper-button iconButton=true}}
+      {{paper-icon "account_circle"}}
+    {{/paper-button}}
+  {{/menu.trigger}}
+  {{#menu.content width=4 as |content|}}
+    {{#content.menu-item href=(href-to "dashboard")}}
+      {{paper-icon "dashboard"}}
+      <span>Dashboard</span>
+    {{/content.menu-item}}
+
+    {{#content.menu-item href=(href-to "logout")}}
+      {{paper-icon "exit_to_app"}}
+      <span>Sign out</span>
+    {{/content.menu-item}}
+  {{/menu.content}}
+{{/paper-menu}}
