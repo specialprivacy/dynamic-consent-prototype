@@ -130,15 +130,15 @@
 
 
 {{#if showLocationPicker}}
-  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner-recommendation" onClose=(action (mut showLocationPicker) false) as |toast|}}
+  {{#paper-toast duration=false swipeToClose=true position="top right" class="banner" onClose=(action (mut showLocationPicker) false) as |toast|}}
     <div class="layout-column">
       {{#toast.text class="md-margin"}}
         Should we use your current location or do you want to browse the map freely?
       {{/toast.text}}
-      <div class="layout-row">
-        {{#paper-button onClick=(action "useLocation" currentLocation)}}Use my location{{/paper-button}}
-        {{#paper-button onClick=(action (mut showDemo) true)}}Demo{{/paper-button}}
-        {{#paper-button onClick=(action "useLocation" false)}}Browse{{/paper-button}}
+      <div class="layout-row md-padding md-margin">
+        {{#paper-button raised=true primary=true onClick=(action "useLocation" currentLocation)}}Use my location{{/paper-button}}
+        {{#paper-button raised=true primary=true onClick=(action (mut showDemo) true)}}Demo{{/paper-button}}
+        {{#paper-button raised=true primary=true onClick=(action "useLocation" false)}}Browse{{/paper-button}}
       </div>
     </div>
   {{/paper-toast}}
