@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'tourism-application',
+    modulePrefix: 'dynamic-consent',
     environment,
     rootURL: '/dynamic-consent/',
     locationType: 'auto',

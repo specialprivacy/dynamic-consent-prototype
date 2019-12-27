@@ -5,3 +5,4 @@ This prototype shows a possible application using dynamic-consent to ask, when n
 
 ## Configuration
 No configuration required
+

@@ -1,8 +1,8 @@
 {
-  "name": "tourism-application",
+  "name": "dynamic-consent",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for tourism-application goes here",
+  "description": "A prototype for dynamic consent",
   "repository": "",
   "license": "MIT",
   "author": "",
