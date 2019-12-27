@@ -1,7 +1,7 @@
 import { Response } from "ember-cli-mirage";
 
 export default function() {
-  this.passthrough("http://linkedgeodata.org/sparql");
+  this.passthrough("/proxy/sparql");
   this.resource("category");
   this.resource("location");
   this.resource("data-subject");
@@ -58,7 +58,8 @@ FILTER(?category IN (
 }
       `);
 
-    return fetch("http://linkedgeodata.org/sparql", {
+    // return fetch("http://linkedgeodata.org/sparql", {
+    return fetch("/proxy/sparql", {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Accept": "application/json"
@@ -162,7 +163,8 @@ GROUP BY ?uri ?geo ?name
 ORDER BY ?uri
       `);
 
-    return fetch("http://linkedgeodata.org/sparql", {
+    // return fetch("http://linkedgeodata.org/sparql", {
+    return fetch("/proxy/sparql", {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Accept": "application/json"
