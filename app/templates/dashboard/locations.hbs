@@ -11,12 +11,12 @@
         <h3>{{location.latitude}}°, {{location.longitude}}°</h3>
       </div>
       <div class="md-secondary-container">
-        {{#controls.button iconButton=true onClick=(action "delete" category)}}
+        {{#controls.button iconButton=true onClick=(action "delete" location)}}
           {{paper-icon "delete_forever"}}
         {{/controls.button}}
       </div>
     {{/paper-item}}
   {{else}}
-    We did not infer any interest for any locations from your locations.
+    We did not gather any location data about you.
   {{/each}}
 {{/paper-list}}
