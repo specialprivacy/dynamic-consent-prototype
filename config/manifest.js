@@ -5,9 +5,9 @@ module.exports = function(/* environment, appConfig */) {
   // supported properties
 
   return {
-    name: "dynamic-consent",
-    short_name: "dynamic-consent",
-    description: "",
+    name: "Dynamic Consent",
+    short_name: "Special",
+    description: "This application is a prototype to show how consent could be asked of the user when it's really needed instead of asking it from the get go everytime.",
     start_url: "/dynamic-consent/",
     scope: "/dynamic-consent/",
     display: "standalone",
