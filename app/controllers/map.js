@@ -64,7 +64,7 @@ export default Controller.extend({
         promise: new Promise(function(resolve) {
           return resolve(
             {
-              title: "Paulus Potterstrat, Amsterdam",
+              title: "Paulus Potterstrat - Amsterdam",
               coordinates: {
                 latitude: 52.3581812,
                 longitude: 4.8789124
@@ -103,7 +103,7 @@ export default Controller.extend({
         promise: new Promise(function(resolve) {
           return resolve(
             {
-              title: "Louvre Museum, Paris",
+              title: "Louvre Museum - Paris",
               coordinates: {
                 latitude: 48.8606163,
                 longitude: 2.337537
