@@ -15,6 +15,7 @@
         @location={{array location.latitude location.longitude}} as |marker|>
         <marker.popup>
           <h3>{{moment-calendar location.timestamp null (hash sameElse="DD/MM/YYYY")}}</h3>
+          <p>{{if location.inferredCategories.length "This location was used to infer an interest in the following categories." "This location was recorded but wasn't used to infer an interest in any category."}}</p>
           {{#if location.inferredCategories.length}}
             <div class="layout-row">
               {{#each location.inferredCategories as |category|}}
